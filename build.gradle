@@ -49,7 +49,8 @@ dependencies {
 	//servlet
 	compile "javax.servlet:javax.servlet-api:3.1.0"
 	compile "javax.servlet.jsp:javax.servlet.jsp-api:2.3.1"
-	
+    compile 'mysql:mysql-connector-java:5.1.36'	
+
 	//json
 	compile 'org.json:json:20140107'
 	//md5
