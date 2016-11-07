@@ -24,6 +24,7 @@ public class UserLoginResponse extends BaseResponse {
 	private String userId;
 
 
+
     /**
      * 登录名
      */
@@ -44,13 +45,25 @@ public class UserLoginResponse extends BaseResponse {
      */
     private String email;
     
-    
+	/**
+	 * 干扰码
+	 */
+	private String salt;
+	
     //add by zhouxh
 //    private String loginFlag;//是否允许登录
 //    private String delFlag;//是否已标记删除
 //    private Timestamp effectiveDate;//生效时间
 //    private Timestamp expiryDate;//失效时间
     
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
 
 	public String getTenantId() {
 		return tenantId;

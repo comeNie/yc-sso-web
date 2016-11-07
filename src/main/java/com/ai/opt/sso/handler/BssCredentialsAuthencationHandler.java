@@ -1,6 +1,9 @@
 package com.ai.opt.sso.handler;
 
+import java.math.BigInteger;
 import java.security.GeneralSecurityException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
 
@@ -43,7 +46,9 @@ import com.ai.opt.sso.principal.BssCredentials;
 import com.ai.opt.sso.service.LoadAccountService;
 import com.ai.opt.sso.util.RegexUtils;
 import com.ai.opt.uac.web.constants.Constants.Register;
+import com.ai.opt.uac.web.util.Md5Util;
 import com.ai.paas.ipaas.mcs.interfaces.ICacheClient;
+
 import com.ai.paas.ipaas.util.StringUtil;
 
 public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostProcessingAuthenticationHandler{
@@ -156,9 +161,10 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 			
 			
 			String dbPwd=user.getLoginPassword();
+			String salt=user.getSalt();
 			logger.info("【dbPwd】="+dbPwd);
 			logger.info("【pwdFromPage】="+pwdFromPage);
-			String encryPwdFromPage=Md5Encoder.encodePassword(pwdFromPage);
+			String encryPwdFromPage=Md5Utils.md5(Md5Utils.md5(pwdFromPage).concat(salt));
 			if(!encryPwdFromPage.equals(dbPwd)){
 				//密码不对
 				logger.error("密码错误！");
@@ -168,7 +174,7 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 //				//密码不对
 //				throw new CredentialException("账号状态异常");
 //			}
-			Date currentDate=new Date();
+//			Date currentDate=new Date();
 //			Date acitveDate=user.getEffectiveDate();
 //			Date inactiveDate=user.getExpiryDate();
 //			if(acitveDate!=null&&currentDate.before(acitveDate)){
@@ -236,4 +242,24 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 		this.passwordPolicyConfiguration = passwordPolicyConfiguration;
 	}
 
+	   public static class Md5Utils {
+   	    /**
+   		 * 使用md5的算法进行加密
+   		 */
+   		public static String md5(String plainText) {
+   			byte[] secretBytes = null;
+   			try {
+   				secretBytes = MessageDigest.getInstance("md5").digest(
+   						plainText.getBytes());
+   			} catch (NoSuchAlgorithmException e) {
+   				throw new RuntimeException("没有md5这个算法！");
+   			}
+   			String md5code = new BigInteger(1, secretBytes).toString(16);
+   			for (int i = 0; i < 32 - md5code.length(); i++) {
+   				md5code = "0" + md5code;
+   			}
+   			return md5code;
+   		}
+   	}
+	
 }
