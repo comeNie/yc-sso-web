@@ -100,5 +100,5 @@ processResources {
 }
 
 war{
-	baseName  "uac"
+	baseName  "yc-sso-web"
 }
