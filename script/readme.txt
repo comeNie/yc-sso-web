@@ -24,14 +24,14 @@ docker run -d --name yc-sso-web  -p 14105:8080  \
 -e "serverName_Inner=http://10.19.13.24:14105"   \
 -e "logOutServerUrl_Inner=http://10.19.13.24:14105/yc-sso-web/logout"   \
 -e "logOutBackUrl_Inner=http://10.19.13.24:14105/yc-sso-web"   \ 
--e "innerDomains=" \
+-e "innerDomains=test" \
 -e "SDK_MODE=0" \
 -e "PAAS_AUTH_URL=http://10.1.245.4:19811/service-portal-uac-web/service/auth" \
 -e "PAAS_AUTH_PID=D14F7D708109471AB6F3084B2ABAE9A6" \
 -e "PAAS_CCS_ID=CCS008" \
 -e "PAAS_CCS_PWD=123456" \
--e "whitelist=changhong.com" 
-10.19.13.18:5000/yc-sso-web:v1.0  
+-e "whitelist=yeecloud.com" \
+10.19.13.18:5000/yc-sso-web:v1.0_2  
 #查看镜像启动日志
 docker logs yc-sso-web-v1.0
 #进入容器，查看镜像内部的情况
