@@ -1,6 +1,6 @@
 #!/bin/sh
 #env
-APP_NAME="general.uac.web"
+APP_NAME="yc.sso.web"
 
 #set base home
 RESOURCES_HOME=${CATALINA_HOME}/webapps/ROOT/WEB-INF/classes
@@ -20,6 +20,11 @@ sed -i "s%logOutBackUrl_Inner=.*%logOutBackUrl_Inner=${logOutBackUrl_Inner}%g" .
 sed -i "s%innerDomains=.*%innerDomains=${innerDomains}%g" ./sso.properties
 
 sed -i "s%whiteList=.*%whiteList=${whiteList}%g" ./whitelist.properties
+
+sed -i "s%paas.auth.url=.*%paas.auth.url=${PAAS_AUTH_URL}%g" ./paas/paas-conf.properties
+sed -i "s%paas.auth.pid=.*%paas.auth.pid=${PAAS_AUTH_PID}%g" ./paas/paas-conf.properties
+sed -i "s%paas.ccs.serviceid=.*%paas.ccs.serviceid=${PAAS_CCS_ID}%g" ./paas/paas-conf.properties
+sed -i "s%paas.ccs.servicepassword=.*%paas.ccs.servicepassword=${PAAS_CCS_PWD}%g" ./paas/paas-conf.properties
 
 sed -i "s%paas.sdk.mode=.*%paas.sdk.mode=${SDK_MODE}%g" ./paas/paas-conf.properties
 sed -i "s%ccs.appname=.*%ccs.appname=${CCS_NAME}%g" ./paas/paas-conf.properties
