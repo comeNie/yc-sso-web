@@ -13,7 +13,7 @@ docker push 10.19.13.18:5000/yc-sso-web:v1.0
 3. 运行镜像
 #--net=host  表示为主机(host)模式  去掉该配置，默认为桥接(bridge)模式
 #-e 代表需要设置的环境变量
-docker run -d --name yc-sso-web  -p 14105:8080  
+docker run -d --name yc-sso-web  -p 14105:8080  \
 -e "casServerLoginUrl=http://10.19.13.24:14105/yc-sso-web/login"  \
 -e "casServerUrlPrefix=http://10.19.13.24:14105/yc-sso-web"   \
 -e "serverName=http://10.19.13.24:14105"   \
