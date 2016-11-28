@@ -99,7 +99,7 @@
   <bean id="loginHandlerAdapter" class="org.jasig.cas.web.flow.SelectiveFlowHandlerAdapter"
         p:supportedFlowId="login" p:flowExecutor-ref="loginFlowExecutor" p:flowUrlHandler-ref="loginFlowUrlHandler" />
 
-  <bean id="loginFlowUrlHandler" class="org.jasig.cas.web.flow.CasDefaultFlowUrlHandler" />
+  <bean id="loginFlowUrlHandler" class="com.ai.opt.sso.handler.CustomLoginFlowUrlHandler" />
 
   <webflow:flow-executor id="loginFlowExecutor" flow-registry="loginFlowRegistry">
     <webflow:flow-execution-attributes>
@@ -212,7 +212,7 @@
         p:warnCookieGenerator-ref="warnCookieGenerator"
         p:ticketGrantingTicketCookieGenerator-ref="ticketGrantingTicketCookieGenerator"/>
 
-  <bean id="authenticationViaFormAction" class="org.jasig.cas.web.flow.AuthenticationViaFormAction"
+  <bean id="authenticationViaFormAction" class="com.ai.opt.sso.action.CustomLoginAction"
 		p:centralAuthenticationService-ref="centralAuthenticationService"
         p:warnCookieGenerator-ref="warnCookieGenerator"
         p:ticketRegistry-ref="ticketRegistry" />

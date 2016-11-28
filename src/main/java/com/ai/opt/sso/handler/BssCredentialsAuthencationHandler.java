@@ -4,7 +4,6 @@ import java.math.BigInteger;
 import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -28,11 +27,8 @@ import org.springframework.util.StringUtils;
 
 import com.ai.opt.base.exception.RPCSystemException;
 import com.ai.opt.data.api.user.param.UserLoginResponse;
+import com.ai.opt.sdk.components.ccs.CCSClientFactory;
 import com.ai.opt.sdk.components.mcs.MCSClientFactory;
-import com.ai.opt.sdk.util.Md5Encoder;
-import com.ai.opt.sso.constants.SSOConstants;
-import com.ai.opt.sso.exception.AccountNameNotExistException;
-import com.ai.opt.sso.exception.AccountNotAllowLoginException;
 import com.ai.opt.sso.exception.CaptchaErrorException;
 import com.ai.opt.sso.exception.CaptchaIsNullException;
 import com.ai.opt.sso.exception.CaptchaOutTimeException;
@@ -45,14 +41,17 @@ import com.ai.opt.sso.exception.UsernameIsNullException;
 import com.ai.opt.sso.principal.BssCredentials;
 import com.ai.opt.sso.service.LoadAccountService;
 import com.ai.opt.sso.util.RegexUtils;
+import com.ai.opt.uac.web.constants.Constants;
 import com.ai.opt.uac.web.constants.Constants.Register;
-import com.ai.opt.uac.web.util.Md5Util;
+import com.ai.paas.ipaas.ccs.constants.ConfigException;
 import com.ai.paas.ipaas.mcs.interfaces.ICacheClient;
-
 import com.ai.paas.ipaas.util.StringUtil;
 
 public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostProcessingAuthenticationHandler{
 
+	
+	
+	
 	@Resource
 	private LoadAccountService loadAccountService;
 	@NotNull
@@ -80,6 +79,31 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 	@Override
 	protected HandlerResult doAuthentication(final Credential credentials)
 			throws GeneralSecurityException, PreventedException {
+		
+		//获取配置中心登录失败有效时间
+		String errorNumTimeOut="";
+		try {
+			errorNumTimeOut = CCSClientFactory.getDefaultConfigClient().get("/errorNumTimeOut");
+		} catch (ConfigException e) {
+			logger.error("从配置中心获取登录失败次数失败");
+		}
+		
+		Integer timoutNum = null;
+		if(StringUtils.hasText(errorNumTimeOut)){
+			timoutNum = Integer.valueOf(errorNumTimeOut);
+		}
+		//获取配置中心登录失败次数
+		String errorNumConfig="";
+		try {
+			errorNumConfig = CCSClientFactory.getDefaultConfigClient().get("/errorNum");
+		} catch (ConfigException e) {
+			logger.error("从配置中心获取登录失败次数失败");
+		}
+		
+		Integer errorNumber = null;
+		if(StringUtils.hasText(errorNumConfig)){
+			errorNumber = Integer.valueOf(errorNumConfig);
+		}	
 		logger.debug("开始认证用户凭证credentials");
 		if(credentials == null){
 			logger.info("用户凭证credentials为空");
@@ -88,8 +112,18 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 		BssCredentials bssCredentials = (BssCredentials) credentials;
 		final String username = bssCredentials.getUsername();
 		final String pwdFromPage = bssCredentials.getPassword();
-		final String captchaCode = bssCredentials.getCaptchaCode().toLowerCase();
+
 	    final String sessionId = bssCredentials.getSessionId();
+	    
+	    ICacheClient jedis = MCSClientFactory.getCacheClient("com.ai.opt.uac.cache.logincount.cache");
+	    String requestIp =jedis.get(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+bssCredentials.getId());  
+	    Integer errorNum =Integer.valueOf( jedis.get(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+requestIp));
+	    
+
+	    boolean captchaShow = true;
+	    if(errorNum<=errorNumber){
+	    	captchaShow = false;
+	    }
 		//用户名非空校验
 		if(!StringUtils.hasText(username)){
 			logger.error("请输入手机号码或邮箱地址");
@@ -101,26 +135,28 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 			throw new PasswordIsNullException();
 		}
 		
+		if( captchaShow==true){
+			final String captchaCode = bssCredentials.getCaptchaCode().toLowerCase();
 		
-		 // 验证码非空校验
-        if (!StringUtils.hasText(captchaCode)) {
-            logger.error("请输入验证码");
-            throw new CaptchaIsNullException();
-        }
-
-        ICacheClient iCacheClient = MCSClientFactory.getCacheClient(Register.CACHE_NAMESPACE);
-        // 生成的校验码
-        String cookieCaptcha = iCacheClient.get(Register.CACHE_KEY_VERIFY_PICTURE + sessionId)
-                .toLowerCase();
-        // 校验图片是否失效
-        if (StringUtil.isBlank(cookieCaptcha)) {
-            throw new CaptchaOutTimeException();
-        }
-        // 校验验证码
-        if (!cookieCaptcha.equals(bssCredentials.getCaptchaCode().toLowerCase())) {
-            throw new CaptchaErrorException();
-        }
-		
+			 // 验证码非空校验
+	        if (!StringUtils.hasText(captchaCode)) {
+	            logger.error("请输入验证码");
+	            throw new CaptchaIsNullException();
+	        }
+	
+	        ICacheClient iCacheClient = MCSClientFactory.getCacheClient(Register.CACHE_NAMESPACE);
+	        // 生成的校验码
+	        String cookieCaptcha = iCacheClient.get(Register.CACHE_KEY_VERIFY_PICTURE + sessionId)
+	                .toLowerCase();
+	        // 校验图片是否失效
+	        if (StringUtil.isBlank(cookieCaptcha)) {
+	            throw new CaptchaOutTimeException();
+	        }
+	        // 校验验证码
+	        if (!cookieCaptcha.equals(bssCredentials.getCaptchaCode().toLowerCase())) {
+	            throw new CaptchaErrorException();
+	        }
+		}
 		
 		UserLoginResponse user = null;
 		try {
@@ -153,10 +189,19 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 					logger.error("账号已删除");
 					throw new AccountNameNotExistException();
 				}*/
-				else{
-					logger.error("账号未注册");
+/*				else{
+					logger.error("账号未注册，密码错误");
+					
+					ICacheClient jedis = MCSClientFactory.getCacheClient("com.ai.opt.uac.cache.logincount.cache");
+					 String requestIp =jedis.get(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+bssCredentials.getId());  
+					if(!jedis.exists(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+requestIp)){
+						jedis.set(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+requestIp, 0 + "");  	
+					}
+					jedis.incrBy(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+requestIp, 1);
+					logger.debug("【"+user.getLoginName()+"】 登录失败，目前失败次数为："+jedis.get(Constants.LOGIN_LOST_COUNT_KEY+":"+user.getLoginName()));
+				
 					throw new AccountNameNotExistException();
-				}
+				}*/
 			}
 			
 			
@@ -168,6 +213,15 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 			if(!encryPwdFromPage.equals(dbPwd)){
 				//密码不对
 				logger.error("密码错误！");
+
+
+				
+				if(!jedis.exists(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+requestIp)){
+
+					jedis.setex(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+requestIp,timoutNum.intValue() ,0 + "");  	
+				}
+				jedis.incrBy(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+requestIp, 1);
+				logger.debug("【"+user.getLoginName()+"】 登录失败，目前失败次数为："+jedis.get(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+requestIp));
 				throw new PasswordErrorException();
 			}
 //			if(!SSOConstants.ACCOUNT_ACITVE_STATE.equals(user.getState())){
@@ -190,7 +244,7 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 			bssCredentials.setMobile(user.getMobile());
 			bssCredentials.setEmail(user.getEmail());
 			bssCredentials.setLoginName(user.getLoginName());
-			
+			bssCredentials.setDomainname(user.getDomainname());
 		}
 		/*catch (IllegalAccessException | InvocationTargetException e) {
 			logger.error("从user拷贝属性到bssCredentials出错",e);
@@ -205,9 +259,17 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 		}*/
 		catch (Exception e) {
 			logger.error("系统异常",e);
+		
+			if(!jedis.exists(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+requestIp)){
+				jedis.setex(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+requestIp,timoutNum, 0 + "");  	
+			}
+			jedis.incrBy(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+requestIp, 1);
+			logger.debug("【"+user.getLoginName()+"】 登录失败，目前失败次数为："+jedis.get(Constants.LOGIN_LOST_COUNT_KEY+":"+user.getLoginName()));
 			throw new SystemErrorException();
 		}
 		logger.info("用户 [" + username + "] 认证成功。");
+
+		jedis.del(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+requestIp);  	
         return creatHandlerResult(bssCredentials, new SimplePrincipal(username),null);
 	}
 

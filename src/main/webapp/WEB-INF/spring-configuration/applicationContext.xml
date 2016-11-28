@@ -47,7 +47,7 @@
     -->
     <bean id="timingAspect" class="org.perf4j.log4j.aop.TimingAspect"/>
 
-
+<!-- <import resource="classpath:i18n/context/springmvc-locale.xml"/> -->
     <!-- 
         Message source for this context, loaded from localized "messages_xx" files.]
         

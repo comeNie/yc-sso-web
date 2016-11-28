@@ -40,6 +40,7 @@ public class UserQuerySVImpl implements IUserQuerySV {
 			response.setLoginName(ucMembers.getUsername());
 			response.setEmail(ucMembers.getEmail());
 			response.setMobile(ucMembers.getMobilephone());
+			response.setDomainname(ucMembers.getDomainName());
 		}
 		ResponseHeader responseHeader = new ResponseHeader(true, ResultCode.SUCCESS_CODE, "数据查询成功");
 		response.setResponseHeader(responseHeader);

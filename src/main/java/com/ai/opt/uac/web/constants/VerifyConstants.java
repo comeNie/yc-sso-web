@@ -11,6 +11,7 @@ public final class VerifyConstants {
 		/** 手机验证码长度 */
 		public static final int VERIFY_SIZE = 6;
 
+
 		// /**手机验证码超时时间*/
 		// public static final int VERIFY_OVERTIME = 300;
 		// /** 可重复发送时间*/

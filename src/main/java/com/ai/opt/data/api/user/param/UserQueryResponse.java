@@ -30,8 +30,14 @@ public class UserQueryResponse extends BaseResponse {
      */
     private String email;
 
-
-
+	/**
+	 * 国家代码
+	 * 
+	 * @return
+	 */
+    private String domainname;
+    
+    
 	public String getTenantId() {
 		return tenantId;
 	}
@@ -75,6 +81,14 @@ public class UserQueryResponse extends BaseResponse {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getDomainname() {
+		return domainname;
+	}
+
+	public void setDomainname(String domainname) {
+		this.domainname = domainname;
 	}
 
 }

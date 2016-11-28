@@ -21,6 +21,8 @@ public class BssCredentials extends RememberMeUsernamePasswordCredential {
     private String mobile;
     //邮件
     private String email;
+    //国家代码
+    private String domainname;
     /**
      * 验证码
      */
@@ -72,6 +74,12 @@ public class BssCredentials extends RememberMeUsernamePasswordCredential {
 	}
 	public void setSessionId(String sessionId) {
 		this.sessionId = sessionId;
+	}
+	public String getDomainname() {
+		return domainname;
+	}
+	public void setDomainname(String domainname) {
+		this.domainname = domainname;
 	}    
    
 }

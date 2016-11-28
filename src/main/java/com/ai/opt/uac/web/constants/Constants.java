@@ -5,6 +5,8 @@ public final class Constants {
 	
 	public static final String SYSTEM_ID = "opt-uac";
 	
+	/** 登录失败次数 配置key */
+	public static final String LOGIN_LOST_COUNT_KEY = "login_lost_count";
 	public static final class ResultCode{
 		private ResultCode(){}
     	

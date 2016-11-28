@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@page import="com.ai.opt.uac.web.constants.Constants"%>
 <%@page import="com.ai.opt.sdk.components.mcs.MCSClientFactory"%>
+
 <%@page import="java.net.URLDecoder"%>
 <%@page import="java.util.Date"%>
 <%@ page pageEncoding="UTF-8" %>
@@ -9,6 +10,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <html lang="zh-cn">
 <head>
 <%@ include file="/inc/inc.jsp"%>
@@ -18,20 +20,21 @@
     <title>login</title>
 	<script type="text/javascript" src="${_baasBase }/js/datacheck.js" ></script>
 	<script language="javascript" src="${pageContext.request.contextPath}/resources/spm_modules/app/login/messenger.js"></script>  
-	<script language="javascript" src="${pageContext.request.contextPath}/resources/spm_modules/app/login/casLoginView.js"></script>  
+	<script language="javascript" src="${pageContext.request.contextPath}/resources/spm_modules/app/login/casLoginView.js"></script>
+	  
 </head>
 <body class="login-body">
 		<div class="login-big"> 
 	<form:form method="post" id="fm1" name="fm1" commandName="${commandName}" htmlEscape="true">
-			<div class="login-headr"><p><img src="${_baasBase }/images/login-logo.png" /></p><p class="word">账号登录</p></div>
+			<div class="login-headr"><p><img src="${_baasBase }/images/login-logo.png" /></p><p class="word"><spring:message code="dom.lables.accountlongin"/></p></div>
 			<div class="login-wrapper">
 				<div class="login-left"><img src="${_baasBase }/images/login-bj.png"></div>
 				<div class="login-right radius">
-					<div class="login-title">登录</div>
+					<div class="login-title"><spring:message code="dom.lables.signin"/></div>
 					<div class="login-form-title">
 						<ul>
 							<label id="errorMsg"><form:errors path="*" id="msg" cssClass="errors" element="label" htmlEscape="false" /></label>
-							<p class="right"><a href="#"><i class="icon iconfont">&#xe613;</i>手机快速登录</a></p>
+							<p class="right"><a href="#"><i class="icon iconfont">&#xe613;</i><spring:message code="dom.lables.mpql"/></a></p>
 						</ul>
 					</div>
 					<div class="login-form ">
@@ -39,35 +42,42 @@
 							<li class="int-border radius">
 								<p class="int-icon"><i class="icon iconfont">&#xe60c;</i></p>
 								<p>
-									<form:input cssClass="int-text logon-int" cssErrorClass="error" id="username" tabindex="1" accesskey="${userNameAccessKey}" path="username" autocomplete="off" htmlEscape="true" placeholder="登录名/手机号／邮箱"/>
+									<spring:message code="dom.lables.username" var="dom.lables.username"/>
+									<form:input cssClass="int-text logon-int" cssErrorClass="error" id="username" tabindex="1" accesskey="${userNameAccessKey}" path="username" autocomplete="off" htmlEscape="true"  
+									placeholder="${dom.lables.username}"/>
 								</p>
 							</li>
 							<li class="int-border radius">
 								<p class="int-icon"><i class="icon iconfont">&#xe609;</i></p>
 								<p>
-								<form:password  cssClass="int-text logon-int" cssErrorClass="error" id="password" size="25" tabindex="2" path="password"  accesskey="${passwordAccessKey}" htmlEscape="true" autocomplete="off"  placeholder="密码" onkeydown="encryptPwd(event)"/>
+								<spring:message code="dom.lables.password" var="dom.lables.password"/>
+								<form:password  cssClass="int-text logon-int" cssErrorClass="error" id="password" size="25" tabindex="2" path="password"  accesskey="${passwordAccessKey}" htmlEscape="true" autocomplete="off" 
+								 placeholder="${dom.lables.password}" onkeydown="encryptPwd(event)"/>
 								</p>
 							</li>
+							<c:if test="${errorNum>3}">
 							<li>
 								
 								<p>
-								        <input type="text" class="int-text logon-yz-int radius" id="captchaCode" 	
+								      <input type="text" class="int-text logon-yz-int radius" id="captchaCode" 	
 													tabindex="3" name="captchaCode" path="captchaCode" onkeydown="encryptCaptcha(event)"
-													placeholder="请输入验证码"> 
+													placeholder="<spring:message code="dom.lables.pleasecode"/>"> 
 								</p>
 								<p>
-								      <img title="点击重新获取验证码" src="${_base}/captcha/getImageVerifyCode" id="pictureVitenfy" onclick="reloadImage('${_base}/captcha/getImageVerifyCode');">
+									<spring:message code="dom.lables.codeagain" var="dom.lables.codeagain"/>
+								      <img title="${dom.lables.codeagain}" src="${_base}/captcha/getImageVerifyCode" id="pictureVitenfy" onclick="reloadImage('${_base}/captcha/getImageVerifyCode');">
 								 </p>
 							</li>
+							</c:if>
 							<li>
-								<p><a href="#">注册</a></p>
-								<p class="right"><a href="#">忘记密码</a></p>
+								<p><a href="#"><spring:message code="dom.lables.register"/></a></p>
+								<p class="right"><a href="#"><spring:message code="dom.lables.forget"/></a></p>
 							</li>
 							<li>
-								<input type="button" class="btn btn-blue login-btn radius20" value="登 录" onclick="javascript:dologin();">
+								<input type="button" class="btn btn-blue login-btn radius20" value="<spring:message code="dom.lables.signin"/>" onclick="javascript:dologin();">
 							</li>
 							<li>
-								<p>合作账号登录</p>
+								<p><spring:message code="dom.lables.cooperative"/></p>
 								<p class="line"></p>
 							</li>
 							<li>
@@ -84,7 +94,7 @@
 					
 				</div>
 			</div>
-			
+		<input type="hidden"  id="errorNum" name="errorNum" value="${errorNum}">
 		<input type="hidden" name="lt" value="${loginTicket}" />
 		<input type="hidden" name="execution" value="${flowExecutionKey}" />
 		<input type="hidden" name="_eventId" value="submit" />

@@ -1,4 +1,10 @@
 $(function(){
+	
+
+	jQuery.i18n.properties({
+        name: ['messages'],path:_i18n_res, mode: 'both', language: currentLan
+    });
+	
 	if (self != top) {  
 	    var messenger = new Messenger('mainFrame', 'MgmtMessage'),
 	    input = document.getElementById('message');
@@ -56,6 +62,7 @@ function resetErrMsg(){
 		document.getElementById("password").value = inputPassword;
 		document.getElementById("username").value = $.trim(document
 				.getElementById("username").value);
+
 		//提交表单
 		document.getElementById('fm1').submit();
 		return true;
@@ -67,9 +74,12 @@ function resetErrMsg(){
 }//end of dologin
  
 function validate() {
+
 	var username=document.getElementById("username").value;
 	var password=document.getElementById("password").value;
-	var captcha=document.getElementById("captchaCode").value;
+	
+	var errorNum = document.getElementById("errorNum").value;
+
 	try {
 		if (isNull(username)) {
 			showErrMsg("请输入用户名");
@@ -83,12 +93,16 @@ function validate() {
 		}else{
 			resetErrMsg();
 		}
-		if (isNull(captcha)) {
-			showErrMsg("请输入验证码");
-			return false;
-		}else{
-			resetErrMsg();
+		if(errorNum>3){
+			var captcha=document.getElementById("captchaCode").value;		
+			if (isNull(captcha)) {
+				showErrMsg("请输入验证码");
+				return false;
+			}else{
+				resetErrMsg();
+			}
 		}
+		
 		
 		return true;
 	} catch (ex) {

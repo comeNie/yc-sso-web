@@ -50,6 +50,11 @@ public class UserLoginResponse extends BaseResponse {
 	 */
 	private String salt;
 	
+	/**
+	 * 国家代码
+	 */
+	private String domainname;
+	
     //add by zhouxh
 //    private String loginFlag;//是否允许登录
 //    private String delFlag;//是否已标记删除
@@ -112,6 +117,14 @@ public class UserLoginResponse extends BaseResponse {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getDomainname() {
+		return domainname;
+	}
+
+	public void setDomainname(String domainname) {
+		this.domainname = domainname;
 	}
 
 //	public String getLoginFlag() {
