@@ -126,7 +126,7 @@
       logger to System.out.
     -->
     <root>
-        <level value="DEBUG" />
+        <level value="error" />
         <appender-ref ref="console" />
     </root>
 </log4j:configuration>

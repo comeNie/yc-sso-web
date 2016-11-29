@@ -23,7 +23,7 @@
   <Loggers>
     <logger name="com.ai.opt.sdk" level="info" additivity="false">
          <AppenderRef ref="RollingFile" />
-         <AppenderRef ref="debug" />
+         <AppenderRef ref="info" />
     </logger>
 	<logger name="org.mybatis" additivity="true">
 		<level value="debug" />
@@ -51,7 +51,11 @@
           <AppenderRef ref="RollingFile" />
 	      <AppenderRef ref="debug" />
     </logger>   
-    <Root level="debug">
+    <logger name="com.ai.yc.order.dao.mapper" level="debug" additivity="false">
+          <AppenderRef ref="RollingFile" />
+	      <AppenderRef ref="STDOUT" />
+      </logger>
+    <Root level="error">
       <AppenderRef ref="RollingFile" />
       <AppenderRef ref="STDOUT" />
     </Root>
