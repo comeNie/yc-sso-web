@@ -116,8 +116,13 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 	    final String sessionId = bssCredentials.getSessionId();
 	    
 	    ICacheClient jedis = MCSClientFactory.getCacheClient("com.ai.opt.uac.cache.logincount.cache");
+
 	    String requestIp =jedis.get(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+bssCredentials.getId());  
-	    Integer errorNum =Integer.valueOf( jedis.get(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+requestIp));
+	    Integer errorNum =0;
+	   if( (boolean)jedis.exists(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+requestIp)){
+		   errorNum =Integer.valueOf( jedis.get(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+requestIp));
+	   }
+	 
 	    
 
 	    boolean captchaShow = true;
