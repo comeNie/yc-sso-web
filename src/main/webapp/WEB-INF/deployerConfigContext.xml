@@ -185,6 +185,7 @@
             		<value>loginName</value>
             		<value>mobile</value>
             		<value>email</value>
+            		<value>domainname</value>
             	</list>
             </property>
         </bean>

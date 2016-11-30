@@ -5,7 +5,7 @@
 <html>
 <head>
 <%@ include file="/inc/inc.jsp"%>
-<title>长虹UP物联网单点登录</title>
+<title>译云单点登录</title>
 <!--Support IE Text -->
 <meta http-equiv="X-UA-Compatible" content="IE=Edge" /> 
 </head>

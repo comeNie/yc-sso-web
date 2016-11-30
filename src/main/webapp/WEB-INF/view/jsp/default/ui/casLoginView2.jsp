@@ -16,7 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <%-- <link rel="shortcut icon" href="${_baasBase }/images/citic.ico"> --%>
     <meta name="viewport" content="width=device-width; initial-scale=0.8;  user-scalable=0;" />
-    <title>长虹UP物联网单点登录</title>
+    <title>译云单点登录</title>
 	<script type="text/javascript" src="${_baasBase }/js/datacheck.js" ></script>
 	<script language="javascript" src="${pageContext.request.contextPath}/resources/spm_modules/app/login/messenger.js"></script>  
 	<script language="javascript" src="${pageContext.request.contextPath}/resources/spm_modules/app/login/casLoginView.js"></script>  
