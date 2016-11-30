@@ -24,14 +24,16 @@
 	<%
 	String default_editpassword_url = CCSClientFactory.getDefaultConfigClient().get("/default_editpassword_url");
 	String default_register_url = CCSClientFactory.getDefaultConfigClient().get("/default_register_url");
+
 	 request.setAttribute("default_editpassword_url", default_editpassword_url);
 	 request.setAttribute("default_register_url", default_register_url);
+
 	%>  
 </head>
 <body class="login-body">
 		<div class="login-big"> 
 	<form:form method="post" id="fm1" name="fm1" commandName="${commandName}" htmlEscape="true">
-			<div class="login-headr"><p><img src="${_baasBase }/images/login-logo.png" /></p><p class="word"><spring:message code="dom.lables.accountlongin"/></p></div>
+			<div class="login-headr"><p><a href="${default_index_url}"><img src="${_baasBase }/images/login-logo.png" /></a></p><p class="word"><spring:message code="dom.lables.accountlongin"/></p></div>
 			<div class="login-wrapper">
 				<div class="login-left"><img src="${_baasBase }/images/login-bj.png"></div>
 				<div class="login-right radius">
