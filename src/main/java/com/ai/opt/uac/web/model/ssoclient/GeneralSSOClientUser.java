@@ -24,7 +24,17 @@ public class GeneralSSOClientUser implements Serializable {
     private String mobile;
     //邮件
     private String email;    
+    //国家代码--译库
+    private String domainname;
     
+    
+    
+	public String getDomainname() {
+		return domainname;
+	}
+	public void setDomainname(String domainname) {
+		this.domainname = domainname;
+	}
 	public String getUsername() {
 		return username;
 	}
