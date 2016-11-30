@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <%@page import="com.ai.opt.uac.web.constants.Constants"%>
 <%@page import="com.ai.opt.sdk.components.mcs.MCSClientFactory"%>
-
+<%@page import="com.ai.opt.sdk.components.ccs.CCSClientFactory"%>
 <%@page import="java.net.URLDecoder"%>
 <%@page import="java.util.Date"%>
 <%@ page pageEncoding="UTF-8" %>
@@ -21,7 +21,12 @@
 	<script type="text/javascript" src="${_baasBase }/js/datacheck.js" ></script>
 	<script language="javascript" src="${pageContext.request.contextPath}/resources/spm_modules/app/login/messenger.js"></script>  
 	<script language="javascript" src="${pageContext.request.contextPath}/resources/spm_modules/app/login/casLoginView.js"></script>
-	  
+	<%
+	String default_editpassword_url = CCSClientFactory.getDefaultConfigClient().get("/default_editpassword_url");
+	String default_register_url = CCSClientFactory.getDefaultConfigClient().get("/default_register_url");
+	 request.setAttribute("default_editpassword_url", default_editpassword_url);
+	 request.setAttribute("default_register_url", default_register_url);
+	%>  
 </head>
 <body class="login-body">
 		<div class="login-big"> 
@@ -70,8 +75,8 @@
 							</li>
 							</c:if>
 							<li>
-								<p><a href="#"><spring:message code="dom.lables.register"/></a></p>
-								<p class="right"><a href="#"><spring:message code="dom.lables.forget"/></a></p>
+								<p><a href="${default_register_url}"><spring:message code="dom.lables.register"/></a></p>
+								<p class="right"><a href="${default_editpassword_url}"><spring:message code="dom.lables.forget"/></a></p>
 							</li>
 							<li>
 								<input type="button" class="btn btn-blue login-btn radius20" value="<spring:message code="dom.lables.signin"/>" onclick="javascript:dologin();">
