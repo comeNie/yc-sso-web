@@ -16,6 +16,10 @@
       <param-name>ignore_suffix</param-name>
       <param-value>.png,.jpg,.jpeg,.gif,.css,.js,.html,.htm</param-value>
     </init-param>
+    <init-param>
+        <param-name>cookie_name</param-name>
+        <param-value>YC_SSO_JESSIONID</param-value>
+    </init-param>
   </filter>
   <filter-mapping>
     <filter-name>sessionFilter</filter-name>
