@@ -139,7 +139,7 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 			logger.error("密码为空！");
 			throw new PasswordIsNullException();
 		}
-		
+	      logger.error("captchaShow=="+captchaShow);
 		if( captchaShow==true){
 			final String captchaCode = bssCredentials.getCaptchaCode().toLowerCase();
 		
