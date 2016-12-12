@@ -158,6 +158,10 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 	            throw new CaptchaOutTimeException();
 	        }
 	        // 校验验证码
+	        
+	        logger.error("cookieCaptcha=="+cookieCaptcha);
+	        logger.error("bssCredentials=="+bssCredentials.getCaptchaCode().toLowerCase());
+	        
 	        if (!cookieCaptcha.equals(bssCredentials.getCaptchaCode().toLowerCase())) {
 	            throw new CaptchaErrorException();
 	        }
