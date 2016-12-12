@@ -77,7 +77,7 @@ function validate() {
 
 	var username=document.getElementById("username").value;
 	var password=document.getElementById("password").value;
-	
+	var errorNumCCS=document.getElementById("errorNumCCS").value;
 	var errorNum = document.getElementById("errorNum").value;
 
 	try {
@@ -93,7 +93,7 @@ function validate() {
 		}else{
 			resetErrMsg();
 		}
-		if(errorNum>3){
+		if(errorNum>=errorNumCCS){
 			var captcha=document.getElementById("captchaCode").value;		
 			if (isNull(captcha)) {
 				showErrMsg("请输入验证码");
