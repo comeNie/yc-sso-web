@@ -225,13 +225,6 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 				logger.error("密码错误！");
 
 
-				
-				if(!jedis.exists(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+requestIp)){
-
-					jedis.setex(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+requestIp,timoutNum.intValue() ,0 + "");  	
-				}
-				jedis.incrBy(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+requestIp, 1);
-				logger.debug("【"+user.getLoginName()+"】 登录失败，目前失败次数为："+jedis.get(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+requestIp));
 				throw new PasswordErrorException();
 			}
 //			if(!SSOConstants.ACCOUNT_ACITVE_STATE.equals(user.getState())){

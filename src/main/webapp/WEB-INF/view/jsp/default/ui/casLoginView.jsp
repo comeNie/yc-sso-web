@@ -61,7 +61,7 @@
 								<form:password  cssClass="int-text logon-int" cssErrorClass="error" id="password" size="25" tabindex="2" path="password"  accesskey="${passwordAccessKey}" htmlEscape="true" autocomplete="off" 
 								 placeholder="${dom.lables.password}" onkeydown="encryptPwd(event)"/>
 								</p>
-							</li>${errorNum}
+							</li>
 							<c:if test="${errorNum>3}">
 							<li>
 								
