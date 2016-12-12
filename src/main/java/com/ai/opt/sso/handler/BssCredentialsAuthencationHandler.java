@@ -29,6 +29,7 @@ import com.ai.opt.base.exception.RPCSystemException;
 import com.ai.opt.data.api.user.param.UserLoginResponse;
 import com.ai.opt.sdk.components.ccs.CCSClientFactory;
 import com.ai.opt.sdk.components.mcs.MCSClientFactory;
+import com.ai.opt.sso.exception.AccountNameNotExistException;
 import com.ai.opt.sso.exception.CaptchaErrorException;
 import com.ai.opt.sso.exception.CaptchaIsNullException;
 import com.ai.opt.sso.exception.CaptchaOutTimeException;
@@ -207,21 +208,16 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 					logger.error("账号已删除");
 					throw new AccountNameNotExistException();
 				}*/
-/*				else{
+				else{
 					logger.error("账号未注册，密码错误");
-					
-					ICacheClient jedis = MCSClientFactory.getCacheClient("com.ai.opt.uac.cache.logincount.cache");
-					 String requestIp =jedis.get(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+bssCredentials.getId());  
-					if(!jedis.exists(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+requestIp)){
-						jedis.set(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+requestIp, 0 + "");  	
-					}
-					jedis.incrBy(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+requestIp, 1);
-					logger.debug("【"+user.getLoginName()+"】 登录失败，目前失败次数为："+jedis.get(Constants.LOGIN_LOST_COUNT_KEY+":"+user.getLoginName()));
-				
+	
 					throw new AccountNameNotExistException();
-				}*/
+				}
 			}
-			
+			if(user.getEmailcheck()==0){
+				logger.error("邮箱未绑定");
+				throw new EmailNotExistException();
+			}
 			
 			String dbPwd=user.getLoginPassword();
 			String salt=user.getSalt();
@@ -235,6 +231,7 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 
 				throw new PasswordErrorException();
 			}
+			
 //			if(!SSOConstants.ACCOUNT_ACITVE_STATE.equals(user.getState())){
 //				//密码不对
 //				throw new CredentialException("账号状态异常");
@@ -264,10 +261,10 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 		catch (RPCSystemException e) {
 			logger.error("调用查询账户服务（Dubbo）失败",e);
 			throw new CredentialException("系统错误");
-		}/*catch(AccountNotAllowLoginException e){
-			logger.error("该用户被冻结",e);
-			throw new AccountNotAllowLoginException();
-		}*/
+		}catch(EmailNotExistException e){
+			logger.error("邮箱未绑定",e);
+			throw new EmailNotExistException();
+		}
 		catch (Exception e) {
 			logger.error("系统异常",e);
 		

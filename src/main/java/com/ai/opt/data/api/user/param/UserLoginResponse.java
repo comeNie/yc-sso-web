@@ -55,6 +55,10 @@ public class UserLoginResponse extends BaseResponse {
 	 */
 	private String domainname;
 	
+	/**
+	 * 邮箱是否激活
+	 */
+	 private Integer emailcheck;
     //add by zhouxh
 //    private String loginFlag;//是否允许登录
 //    private String delFlag;//是否已标记删除
@@ -64,6 +68,14 @@ public class UserLoginResponse extends BaseResponse {
 
 	public String getSalt() {
 		return salt;
+	}
+
+	public Integer getEmailcheck() {
+		return emailcheck;
+	}
+
+	public void setEmailcheck(Integer emailcheck) {
+		this.emailcheck = emailcheck;
 	}
 
 	public void setSalt(String salt) {

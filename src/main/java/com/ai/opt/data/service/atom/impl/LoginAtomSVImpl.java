@@ -24,12 +24,15 @@ public class LoginAtomSVImpl implements ILoginAtomSV {
     	UcMembersCriteria.Criteria criteria = conditon.or();
         if (!StringUtil.isBlank(ucMembers.getMobilephone())) {
             criteria.andMobilephoneEqualTo(ucMembers.getMobilephone());
+            criteria.andEnablestatusEqualTo("1");
         }
         if (!StringUtil.isBlank(ucMembers.getEmail())) {
             criteria.andEmailEqualTo(ucMembers.getEmail());
+            criteria.andEnablestatusEqualTo("1");
         }
         if (!StringUtil.isBlank(ucMembers.getUsername())) {
             criteria.andUsernameEqualTo(ucMembers.getUsername());
+            criteria.andEnablestatusEqualTo("1");
         }
 //        // 登录标记为1
 ////        criteria.andLoginFlagEqualTo("1");

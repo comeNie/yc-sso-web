@@ -51,6 +51,7 @@ public class LoginSVImpl implements ILoginSV {
 			response.setLoginPassword(sysUser.getPassword());
 			response.setSalt(sysUser.getSalt());
 			response.setDomainname(sysUser.getDomainName());
+			response.setEmailcheck(sysUser.getEmailcheck());
 			//add by zhouxh
 //			response.setLoginFlag(sysUser.getLoginFlag());
 //			response.setDelFlag(sysUser.getDelFlag());
