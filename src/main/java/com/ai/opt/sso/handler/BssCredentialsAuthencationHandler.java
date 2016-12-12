@@ -161,7 +161,8 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 	        
 	        logger.error("cookieCaptcha=="+cookieCaptcha);
 	        logger.error("bssCredentials=="+bssCredentials.getCaptchaCode().toLowerCase());
-	        
+	        System.out.println("cookieCaptcha=="+cookieCaptcha);
+	        System.out.println("bssCredentials=="+bssCredentials.getCaptchaCode().toLowerCase());
 	        if (!cookieCaptcha.equals(bssCredentials.getCaptchaCode().toLowerCase())) {
 	            throw new CaptchaErrorException();
 	        }
