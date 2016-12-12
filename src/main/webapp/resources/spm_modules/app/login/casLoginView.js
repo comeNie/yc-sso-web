@@ -93,6 +93,9 @@ function validate() {
 		}else{
 			resetErrMsg();
 		}
+		alert("errorNum-------"+errorNum);
+		alert("errorNumCCS-------"+errorNumCCS);
+		alert("true--false-----"+errorNum>=errorNumCCS);
 		if(errorNum>=errorNumCCS){
 			var captcha=document.getElementById("captchaCode").value;		
 			if (isNull(captcha)) {

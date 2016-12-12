@@ -63,7 +63,7 @@
 								</p>
 							</li>
 							<input type="hidden" id="errorNumCCS"  value="${errorNumCCS}"/>
-							<c:if test="${errorNum>3}">
+							<c:if test="${errorNum>=errorNumCCS}">
 							<li>
 								
 								<p>
