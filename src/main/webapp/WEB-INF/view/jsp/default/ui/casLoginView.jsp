@@ -41,7 +41,7 @@
 					<div class="login-form-title">
 						<ul>
 							<label id="errorMsg"><form:errors path="*" id="msg" cssClass="errors" element="label" htmlEscape="false" /></label>
-							<p class="right"><a href="#"><i class="icon iconfont">&#xe613;</i><spring:message code="dom.lables.mpql"/></a></p>
+							<%-- <p class="right"><a href="#"><i class="icon iconfont">&#xe613;</i><spring:message code="dom.lables.mpql"/></a></p> --%>
 						</ul>
 					</div>
 					<div class="login-form ">
@@ -84,7 +84,7 @@
 							<li>
 								<input type="button" class="btn btn-blue login-btn radius20" value="<spring:message code="dom.lables.signin"/>" onclick="javascript:dologin();">
 							</li>
-							<li>
+			<%-- 				<li>
 								<p><spring:message code="dom.lables.cooperative"/></p>
 								<p class="line"></p>
 							</li>
@@ -96,7 +96,7 @@
 								<p><a href="#" class="share share5"></a></p>
 								<p><a href="#" class="share share6"></a></p>
 								<p><a href="#" class="share share7 none-ma"></a></p>	
-							</li>
+							</li> --%>
 						</ul>
 					</div>
 					
