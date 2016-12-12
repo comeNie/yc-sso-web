@@ -123,12 +123,17 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 		   errorNum =Integer.valueOf( jedis.get(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+requestIp));
 	   }
 	 
-	    
+	   logger.error("=====================errorNum========"+errorNum+"==============================");
+	   logger.error("=====================errorNumber========"+errorNumber+"==============================");
 
 	    boolean captchaShow = true;
+	    logger.error("=====================errorNum<=errorNumber========"+(errorNum<=errorNumber)+"==============================");
+
 	    if(errorNum<=errorNumber){
 	    	captchaShow = false;
 	    }
+	    logger.error("=====================captchaShow========"+captchaShow+"==============================");
+
 		//用户名非空校验
 		if(!StringUtils.hasText(username)){
 			logger.error("请输入手机号码或邮箱地址");
