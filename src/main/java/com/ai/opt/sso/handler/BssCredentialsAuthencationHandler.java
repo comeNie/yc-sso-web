@@ -92,6 +92,9 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 		if(StringUtils.hasText(errorNumTimeOut)){
 			timoutNum = Integer.valueOf(errorNumTimeOut);
 		}
+		if(timoutNum<300){
+			timoutNum=300;
+		}
 		//获取配置中心登录失败次数
 		String errorNumConfig="";
 		try {
