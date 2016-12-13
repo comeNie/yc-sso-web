@@ -25,9 +25,11 @@
 	String default_editpassword_url = CCSClientFactory.getDefaultConfigClient().get("/default_editpassword_url");
 	String default_register_url = CCSClientFactory.getDefaultConfigClient().get("/default_register_url");
 	String errorNumCCS = CCSClientFactory.getDefaultConfigClient().get("/errorNum");
+	String errorNumTimeOutCCS = CCSClientFactory.getDefaultConfigClient().get("/errorNumTimeOut");
 	 request.setAttribute("default_editpassword_url", default_editpassword_url);
 	 request.setAttribute("default_register_url", default_register_url);
 	 request.setAttribute("errorNumCCS", errorNumCCS);
+	 request.setAttribute("errorNumTimeOutCCS", errorNumTimeOutCCS);
 	%>  
 </head>
 <body class="login-body">
@@ -62,7 +64,8 @@
 								 placeholder="${dom.lables.password}" onkeydown="encryptPwd(event)"/>
 								</p>
 							</li>
-							<input type="hidden" id="errorNumCCS"  value="${errorNumCCS}"/>
+							<input type="hidden" id="errorNumTimeOutCCS"  name="errorNumTimeOutCCS" value="${errorNumCCS}"/>
+							<input type="hidden" id="errorNumCCS"  name="errorNumCCS" value="${errorNumCCS}"/>
 							<c:if test="${errorNum>=errorNumCCS}">
 							<li>
 								

@@ -46,10 +46,12 @@ import org.springframework.webflow.core.collection.LocalAttributeMap;
 import org.springframework.webflow.execution.Event;
 import org.springframework.webflow.execution.RequestContext;
 
+import com.ai.opt.sdk.components.ccs.CCSClientFactory;
 import com.ai.opt.sdk.components.mcs.MCSClientFactory;
 import com.ai.opt.sso.handler.CustomLoginFlowUrlHandler;
 import com.ai.opt.sso.principal.BssCredentials;
 import com.ai.opt.sso.util.RequestHelper;
+import com.ai.paas.ipaas.ccs.constants.ConfigException;
 import com.ai.paas.ipaas.mcs.interfaces.ICacheClient;
 
 /**
@@ -126,10 +128,19 @@ public class CustomLoginAction  {
         	BssCredentials rmupc = (BssCredentials) credential;  
             // 从session中取出生成验证码的时候就保存在session中的验证码  
             String sessionCode = (String) WebUtils.getHttpServletRequest(context).getSession().getAttribute(code);  
-             
+        	String errorNumConfig="";
+    		try {
+    			errorNumConfig = CCSClientFactory.getDefaultConfigClient().get("/errorNum");
+    		} catch (ConfigException e) {
+    			logger.error("从配置中心获取登录失败次数失败");
+    		}
+    		Integer errorNumber = null;
+    		if(StringUtils.hasText(errorNumConfig)){
+    			errorNumber = Integer.valueOf(errorNumConfig);
+    		}	
             Integer errorNum = getErrorNum(credential);  
             //判断验证码错误次数 大于等于5才需要验证  
-            if(errorNum>=5){  
+            if(errorNum>=errorNumber){  
                  // 如果验证码为null  
                 if (rmupc.getCaptchaCode() == null) {  
                     // 写入日志  

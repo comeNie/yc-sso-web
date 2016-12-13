@@ -82,20 +82,9 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 			throws GeneralSecurityException, PreventedException {
 		
 		//获取配置中心登录失败有效时间
-		String errorNumTimeOut="";
-		try {
-			errorNumTimeOut = CCSClientFactory.getDefaultConfigClient().get("/errorNumTimeOut");
-		} catch (ConfigException e) {
-			logger.error("从配置中心获取登录失败次数失败");
-		}
+
 		
-		Integer timoutNum = null;
-		if(StringUtils.hasText(errorNumTimeOut)){
-			timoutNum = Integer.valueOf(errorNumTimeOut);
-		}
-		if(timoutNum<300){
-			timoutNum=300;
-		}
+	
 		//获取配置中心登录失败次数
 		String errorNumConfig="";
 		try {
@@ -114,6 +103,24 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 			throw new LoginException("Credentials is null");
 		}
 		BssCredentials bssCredentials = (BssCredentials) credentials;
+		
+		
+		String errorNumTimeOut="";
+		if(!StringUtils.hasText(errorNumTimeOut)){
+			try {
+				errorNumTimeOut = CCSClientFactory.getDefaultConfigClient().get("/errorNumTimeOut");
+			} catch (ConfigException e) {
+				logger.error("从配置中心获取登录失败次数失败");
+			}
+		}
+			
+		Integer timoutNum = null;
+		if(StringUtils.hasText(errorNumTimeOut)){
+			timoutNum = Integer.valueOf(errorNumTimeOut);
+		}
+		if(timoutNum<300){
+			timoutNum=300;
+		}
 		final String username = bssCredentials.getUsername();
 		final String pwdFromPage = bssCredentials.getPassword();
 
@@ -214,10 +221,7 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 					throw new AccountNameNotExistException();
 				}
 			}
-			if(user.getEmailcheck()==0){
-				logger.error("邮箱未绑定");
-				throw new EmailNotExistException();
-			}
+
 			
 			String dbPwd=user.getLoginPassword();
 			String salt=user.getSalt();
@@ -261,9 +265,6 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 		catch (RPCSystemException e) {
 			logger.error("调用查询账户服务（Dubbo）失败",e);
 			throw new CredentialException("系统错误");
-		}catch(EmailNotExistException e){
-			logger.error("邮箱未绑定",e);
-			throw new EmailNotExistException();
 		}
 		catch (Exception e) {
 			logger.error("系统异常",e);

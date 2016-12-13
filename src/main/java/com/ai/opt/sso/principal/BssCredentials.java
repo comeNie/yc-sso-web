@@ -28,7 +28,26 @@ public class BssCredentials extends RememberMeUsernamePasswordCredential {
      */
     private String captchaCode;
 
-    /**
+    
+    private String errorNumCCS;
+    
+    
+    private String errorNumTimeOutCCS;
+    
+    
+    public String getErrorNumTimeOutCCS() {
+		return errorNumTimeOutCCS;
+	}
+	public void setErrorNumTimeOutCCS(String errorNumTimeOutCCS) {
+		this.errorNumTimeOutCCS = errorNumTimeOutCCS;
+	}
+	public String getErrorNumCCS() {
+		return errorNumCCS;
+	}
+	public void setErrorNumCCS(String errorNumCCS) {
+		this.errorNumCCS = errorNumCCS;
+	}
+	/**
      * sessionId
      */
     private String sessionId;
