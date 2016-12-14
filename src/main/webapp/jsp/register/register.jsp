@@ -3,7 +3,7 @@
 <head>
 <%@ include file="/inc/inc.jsp"%>
 <!--Support IE Text -->
-<meta http-equiv="X-UA-Compatible" content="IE=Edge" /> 
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
 <title>注册</title>
 <script type="text/javascript" src="${_base}/theme/baas/js/jquery.toggle-password.js" ></script> 
 

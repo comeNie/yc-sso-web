@@ -5,7 +5,7 @@
     <%@ include file="/inc/inc.jsp"%>
     <meta charset="utf-8">
     <!--Support IE Text -->
-	<meta http-equiv="X-UA-Compatible" content="IE=Edge" /> 
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
     <title>找回密码-成功</title>
 </head>
 

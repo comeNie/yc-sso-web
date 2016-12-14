@@ -2,7 +2,7 @@
 <html >
 <head>
 <!--Support IE Text -->
-<meta http-equiv="X-UA-Compatible" content="IE=Edge" /> 
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
 <%@ include file="/inc/inc.jsp"%>
     <title>基本信息</title>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>

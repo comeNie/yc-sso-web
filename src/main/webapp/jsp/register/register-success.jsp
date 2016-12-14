@@ -4,7 +4,7 @@
 <head>
 <%@ include file="/inc/inc.jsp"%>
 <!--Support IE Text -->
-<meta http-equiv="X-UA-Compatible" content="IE=Edge" /> 
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
 <title>注册-成功</title>
  <script type="text/javascript">
 (function () {

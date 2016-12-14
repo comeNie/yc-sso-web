@@ -3,7 +3,7 @@
 <html lang="zh-cn">
 <head>
 <!--Support IE Text -->
-<meta http-equiv="X-UA-Compatible" content="IE=Edge" /> 
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
 <%@ include file="/inc/inc.jsp"%>
     <title>修改密码-身份验证</title>
 </head>
