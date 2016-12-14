@@ -7,7 +7,7 @@
 <%@ include file="/inc/inc.jsp"%>
 <title>译云单点登录</title>
 <!--Support IE Text -->
-<meta http-equiv="X-UA-Compatible" content="IE=Edge" /> 
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
 </head>
 <body>
 <%@include file="/inc/head.jsp" %>
