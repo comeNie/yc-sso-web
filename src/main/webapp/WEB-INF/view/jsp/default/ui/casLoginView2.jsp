@@ -13,7 +13,7 @@
 <head>
 <%@ include file="/inc/inc.jsp"%>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <%-- <link rel="shortcut icon" href="${_baasBase }/images/citic.ico"> --%>
     <meta name="viewport" content="width=device-width; initial-scale=0.8;  user-scalable=0;" />
     <title>译云单点登录</title>

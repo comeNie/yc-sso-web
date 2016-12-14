@@ -9,7 +9,7 @@
 <html lang="zh-cn">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width; initial-scale=0.8;  user-scalable=0;" />
     <title>统一登录认证系统</title>
     <link href="styles/css/font-awesome.css" type="text/css" rel="stylesheet" />
