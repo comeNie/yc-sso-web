@@ -29,7 +29,7 @@
 		<level value="error" />
 	</logger>
 	<logger name="java.sql.ResultSet" additivity="true">
-		<level value="debug" />
+		<level value="info" />
 	</logger>
 	<logger name="org.apache.ibatis" additivity="true">
 		<level value="error" />
@@ -53,12 +53,12 @@
     </logger>   
      	<logger name="com.ai.opt.sso.handler.BssCredentialsAuthencationHandler" level="debug" additivity="false">
           <AppenderRef ref="RollingFile" />
-	      <AppenderRef ref="debug" />
+	      <AppenderRef ref="error" />
     </logger>   
 
-    <Root level="debug">
-      <AppenderRef ref="RollingFile" level="debug"/>
-      <AppenderRef ref="STDOUT" level="debug"/>
+    <Root level="error">
+      <AppenderRef ref="RollingFile" level="error"/>
+      <AppenderRef ref="STDOUT" level="error"/>
     </Root>
   </Loggers>
 </Configuration>

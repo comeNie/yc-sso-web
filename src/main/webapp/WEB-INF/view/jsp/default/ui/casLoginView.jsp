@@ -51,17 +51,16 @@
 							<li class="int-border radius">
 								<p class="int-icon"><i class="icon iconfont">&#xe60c;</i></p>
 								<p>
-									<spring:message code="dom.lables.username" var="dom.lables.username"/>
-									<form:input cssClass="int-text logon-int" cssErrorClass="error" id="username" tabindex="1" accesskey="${userNameAccessKey}" path="username" autocomplete="off" htmlEscape="true"  
-									placeholder="${dom.lables.username}"/>
+									<spring:message code="placeholder.username.tip" var="usernametip"/>
+									<form:input cssClass="int-text logon-int" cssErrorClass="error" id="username" tabindex="1" accesskey="${userNameAccessKey}" path="username" autocomplete="off" htmlEscape="true"  placeholder="${usernametip}"/>
 								</p>
 							</li>
 							<li class="int-border radius">
 								<p class="int-icon"><i class="icon iconfont">&#xe609;</i></p>
 								<p>
-								<spring:message code="dom.lables.password" var="dom.lables.password"/>
+								<spring:message code="placeholder.password.tip" var="passwordtip"/>
 								<form:password  cssClass="int-text logon-int" cssErrorClass="error" id="password" size="25" tabindex="2" path="password"  accesskey="${passwordAccessKey}" htmlEscape="true" autocomplete="off" 
-								 placeholder="${dom.lables.password}" onkeydown="encryptPwd(event)"/>
+								 placeholder="${passwordtip}" onkeydown="encryptPwd(event)"/>
 								</p>
 							</li>
 							<input type="hidden" id="errorNumTimeOutCCS"  name="errorNumTimeOutCCS" value="${errorNumCCS}"/>
@@ -70,13 +69,14 @@
 							<li>
 								
 								<p>
+									  <spring:message code="placeholder.verifycode.tip" var="verifycodetip"/>
 								      <input type="text" class="int-text logon-yz-int radius" id="captchaCode" 	
 													tabindex="3" name="captchaCode" path="captchaCode" onkeydown="encryptCaptcha(event)"
-													placeholder="<spring:message code="dom.lables.pleasecode"/>"> 
+													placeholder="${verifycodetip}"  style="width:250px"> 
 								</p>
 								<p>
 									<spring:message code="dom.lables.codeagain" var="dom.lables.codeagain"/>
-								      <img title="${dom.lables.codeagain}" src="${_base}/captcha/getImageVerifyCode" id="pictureVitenfy" onclick="reloadImage('${_base}/captcha/getImageVerifyCode');">
+								      <img title="${dom.lables.codeagain}" src="${_base}/captcha/getImageVerifyCode" id="pictureVitenfy" onclick="reloadImage('${_base}/captcha/getImageVerifyCode');" style="height:44px;width:84px;margin-left:2px">
 								 </p>
 							</li>
 							</c:if>
