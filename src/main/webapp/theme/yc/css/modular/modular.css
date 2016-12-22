@@ -60,7 +60,7 @@
 .right-title-right p .tp4{width:46px;height:40px;background: url(../../images/icon-big.png) no-repeat -162px -173px;margin-left:21px;}
 .right-list{width:100%;float:left;border:1px solid #e3e6ed;background:#fff;margin-top:20px;padding:20px;min-height:769px;}
 .right-list-title{width:100%;float:left;border-bottom:1px solid #e3e6ed;}
-.right-list-title p{float:left;line-height:30px;font-size:16px;color:#2c3e50}
+.right-list-title p{float:left;line-height:30px;font-size:16px;color:#2c3e50;}
 .right-list-title .right{float:right}
 .right-list-table{width: 100%;float:left;margin-top:20px;position:relative;}
 .right-list-table table tr td .btn{margin-right:10px;}
@@ -315,7 +315,7 @@ opacity:0;filter:alpha(opacity=0); -moz-opacity:0; -khtml-opacity:0;}
 .translate-int1 label{position:absolute;top:-40px;right:0px;font-size:12px;color:#fe6b6b}
 /**选择级别**/
 .selection-level{width:100%;float:left}
-.selection-level ul{width:352px;height:250px;float:left;background:#f8f8f8;border-radius:5px;margin-left:30px;padding:20px 30px 30px 30px;position:relative;}
+.selection-level ul{width:352px;height:250px;float:left;background:#f8f8f8;border-radius:5px;margin-left:34px;padding:20px 30px 30px 30px;position:relative;}
 /*.selection-level ul:hover{-webkit-box-shadow: #3292f8 0px 0px 8px;-moz-box-shadow: #3292f8 0px 0px 8px;box-shadow: #3292f8 0px 0px 8px;}*/
 .selection-level .none-ml{margin:0;}
 .selection-level ul li{width:100%;float:left;margin-bottom:15px;}
@@ -323,20 +323,22 @@ opacity:0;filter:alpha(opacity=0); -moz-opacity:0; -khtml-opacity:0;}
 .selection-level ul .blue p{color:#2361ea;font-size:18px}
 .selection-level ul .blue i{font-size:18px;margin-left:18px;}
 .selection-level ul li span{font-size:24px;color:#fe6b6b;}
-.selection-level ul .green-li p{font-size:12px;}
-.selection-level ul .green-li p i{font-size:12px;margin-right:20px;color:#43d4b0}
+.selection-level ul .green-li p{font-size:12px;float:left}
+.selection-level ul .green-li p i{font-size:12px;margin-right:20px;color:#43d4b0;font-weight:bold;margin-top:2px;float:left}
 .selection-level .current{background:#fff;-webkit-box-shadow:0 0px 4px 2px rgba(212, 224, 251,1);-moz-box-shadow:0 0px 4px 2px rgba(212, 224, 251,1);box-shadow:0 0px 4px 2px rgba(212, 224, 251,1)}
-.selection-level .current label{position:absolute;right:-6px;top:-14px;background: url(../../images/icon-big.png) no-repeat left -2189px;width:23px;height:23px;}
+.selection-level .current label{position:absolute;right:-12px;top:-14px;background: url(../../images/icon-big.png) no-repeat left -2189px;width:23px;height:23px;}
 .selection-select{width:100%;float:left}
 .selection-select ul{width:100%;float:left}
 .selection-select ul li{width:190px;float:left;margin-left:30px;position:relative;}
 .selection-select ul li p{}
 .selection-select ul li label{position:absolute;top:0px;right:0px;font-size:12px;color:#fe6b6b}
-.selection-select ul .word{font-size:16px;color:#2c3e50;margin-bottom:20px;}
+.selection-select ul .word{font-size:14px;color:#2c3e50;margin-bottom:20px;font-weight:bold;}
 .selection-select ul .none-ml{margin-left:0;}
 .selection-select ul .width-large{width:460px;}
 .selection-select ul .width-large p{float:left;}
 .selection-select ul .width-large .word{width: 100%;}
+.selection-select ul li .int-posit{}
+.selection-select ul li .int-posit i{position:absolute;right:10px;top:52px;}
 .urgent{width:100%;float:left;}
 .urgent ul{width:100%;float:left;}
 .urgent ul li{float:left;margin-right:110px;}
@@ -352,12 +354,12 @@ opacity:0;filter:alpha(opacity=0); -moz-opacity:0; -khtml-opacity:0;}
 /**联系方式页 口译**/
 .oral-form{width:100%;float:left;margin-top:20px;}
 .oral-form ul{width:100%;float:left;position:relative;}
-.oral-form ul li{float:left}
+.oral-form ul li{width:100%;float:left}
 .oral-form ul li p{float:left;margin-right:40px;}
 .oral-form ul li label{position:absolute;top:-40px;right:0;color:#fe6b6b;font-size:12px;}
-.oral-form ul .right{float:right}
+.oral-form ul .right{float:right;}
 .oral-form ul .right a{font-size:16px;color:#2965e6}
-.oral-form ul .right-btn{float:right;text-align: right;margin:10px 20px 0 0;}
+.oral-form ul .right-btn{float:right;text-align: right;margin:10px 0px 0 0;}
 .oral-form ul li .mr-0{margin-right:0;}
 .table-th-color thead tr th{font-size:14px;color:#2c3e50;font-weight:bold;text-align:left;}
 .table-th-color tr td{text-align:left;}
@@ -373,8 +375,8 @@ opacity:0;filter:alpha(opacity=0); -moz-opacity:0; -khtml-opacity:0;}
 .payment-method{width:100%;float:left;}
 .payment-method ul{width:200px;height:130px;float:left;background:#f8f8f8;border-radius:5px;margin-right:30px;position:relative;}
 /*.payment-method ul:hover{-webkit-box-shadow: #3292f8 0px 0px 8px;-moz-box-shadow: #3292f8 0px 0px 8px;box-shadow: #3292f8 0px 0px 8px;}*/
-.payment-method .current{-webkit-box-shadow: #77b8fc 0px 0px 6px;-moz-box-shadow: #77b8fc 0px 0px 6px;box-shadow: #77b8fc 0px 0px 6px;}
-.payment-method .current li{color:#2965e6}
+.payment-method .current{-webkit-box-shadow: #77b8fc 0px 0px 6px;-moz-box-shadow: #77b8fc 0px 0px 6px;box-shadow: #77b8fc 0px 0px 6px;background:#fff;}
+.payment-method .current li{color:#2965e6;}
 .payment-method .current label{position:absolute;right:-6px;top:-14px;z-index: 99;color:#2865e6;font-size:18px}
 .payment-method ul li{text-align:center;line-height:130px;font-size:18px;color:#6a6c6f;font-weight:bold;}
 .payment-method ul .union{width:137px;height:35px;background: url(../../images/icon-big.png) no-repeat left -345px;margin:45px 0 0 30px}
