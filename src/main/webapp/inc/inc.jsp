@@ -43,7 +43,9 @@ request.setAttribute("citic_help_index_url",citic_help_index_url ); */
 <script src="${_base}/resources/spm_modules/seajs/seajs-css.js"></script>
 <script src="${_base}/resources/spm_modules/jquery-i18n/1.2.2/jquery.i18n.properties.min.js"></script>
 <script src="${_base}/resources/spm_modules/app/core/config.js"></script>
-
+<!--[if lte IE 9]>
+<script  type="text/javascript" src="${_base}/theme/yc/js/placeholder.js"></script>
+<![endif]-->
 
 <!-- UED style begin -->
     <link href="${_base}/theme/yc/css/bootstrap/font-awesome.css" rel="stylesheet" type="text/css">
