@@ -144,7 +144,7 @@ public class CustomLoginAction  {
                  // 如果验证码为null  
                 if (rmupc.getCaptchaCode() == null) {  
                     // 写入日志  
-                    logger.warn( "验证码为空" );  
+                    logger.error( "验证码为空" );  
                     // 错误信息，会在配置文件（messages_zh_CN.properties）里面先定义好  
                     final String code = "required.captcha" ;  
                     // 发送错误信息到前台  

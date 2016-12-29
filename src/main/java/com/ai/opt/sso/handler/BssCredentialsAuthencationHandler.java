@@ -93,9 +93,9 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 			logger.error("从配置中心获取登录失败次数失败");
 		}
 		
-		Integer errorNumber = null;
+		Integer errorNumberCCS = null;
 		if(StringUtils.hasText(errorNumConfig)){
-			errorNumber = Integer.valueOf(errorNumConfig);
+			errorNumberCCS = Integer.valueOf(errorNumConfig);
 		}	
 		logger.debug("开始认证用户凭证credentials");
 		if(credentials == null){
@@ -135,13 +135,13 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 	   }
 	 
 	   logger.error("=====================errorNum========"+errorNum+"==============================");
-	   logger.error("=====================errorNumber========"+errorNumber+"==============================");
+	   logger.error("=====================errorNumber========"+errorNumberCCS+"==============================");
 
-	    boolean captchaShow = true;
-	    logger.error("=====================errorNum<=errorNumber========"+(errorNum<=errorNumber)+"==============================");
+	    boolean captchaShow = false;
+	    logger.error("=====================errorNum<=errorNumber========"+(errorNum<=errorNumberCCS)+"==============================");
 
-	    if(errorNum<=errorNumber){
-	    	captchaShow = false;
+	    if(errorNum>=errorNumberCCS){
+	    	captchaShow = true;
 	    }
 	    logger.error("=====================captchaShow========"+captchaShow+"==============================");
 
@@ -273,7 +273,7 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 				jedis.setex(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+requestIp,timoutNum, 0 + "");  	
 			}
 			jedis.incrBy(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+requestIp, 1);
-			logger.debug("【"+user.getLoginName()+"】 登录失败，目前失败次数为："+jedis.get(Constants.LOGIN_LOST_COUNT_KEY+":"+user.getLoginName()));
+			logger.error("【"+user.getLoginName()+"】 登录失败，目前失败次数为："+jedis.get(Constants.LOGIN_LOST_COUNT_KEY+":"+user.getLoginName()));
 			throw new SystemErrorException();
 		}
 		logger.info("用户 [" + username + "] 认证成功。");
