@@ -63,7 +63,7 @@
 								 placeholder="${passwordtip}" onkeydown="encryptPwd(event)"/>
 								</p>
 							</li>
-							<input type="hidden" id="errorNumTimeOutCCS"  name="errorNumTimeOutCCS" value="${errorNumCCS}"/>
+							<input type="hidden" id="errorNumTimeOutCCS"  name="errorNumTimeOutCCS" value="${errorNumTimeOutCCS}"/>
 							<input type="hidden" id="errorNumCCS"  name="errorNumCCS" value="${errorNumCCS}"/>
 							<c:if test="${errorNum>=errorNumCCS}">
 							<li>

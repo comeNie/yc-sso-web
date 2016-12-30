@@ -28,6 +28,7 @@ public class BssCredentialToPrincipalResolver implements PrincipalResolver {
         attributes.put("mobile", bssCredentials.getMobile());
         attributes.put("email", bssCredentials.getEmail());
         attributes.put("domainname", bssCredentials.getDomainname());
+        attributes.put("errorNum", bssCredentials.getErrorNum());
 		return new SimplePrincipal(principalId , attributes);
 	}
 

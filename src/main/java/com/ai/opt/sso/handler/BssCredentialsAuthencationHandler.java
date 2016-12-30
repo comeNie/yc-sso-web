@@ -85,18 +85,7 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 
 		
 	
-		//获取配置中心登录失败次数
-		String errorNumConfig="";
-		try {
-			errorNumConfig = CCSClientFactory.getDefaultConfigClient().get("/errorNum");
-		} catch (ConfigException e) {
-			logger.error("从配置中心获取登录失败次数失败");
-		}
-		
-		Integer errorNumberCCS = null;
-		if(StringUtils.hasText(errorNumConfig)){
-			errorNumberCCS = Integer.valueOf(errorNumConfig);
-		}	
+
 		logger.debug("开始认证用户凭证credentials");
 		if(credentials == null){
 			logger.info("用户凭证credentials为空");
@@ -105,14 +94,8 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 		BssCredentials bssCredentials = (BssCredentials) credentials;
 		
 		
-		String errorNumTimeOut="";
-		if(!StringUtils.hasText(errorNumTimeOut)){
-			try {
-				errorNumTimeOut = CCSClientFactory.getDefaultConfigClient().get("/errorNumTimeOut");
-			} catch (ConfigException e) {
-				logger.error("从配置中心获取登录失败次数失败");
-			}
-		}
+		String errorNumTimeOut=bssCredentials.getErrorNumTimeOutCCS();
+
 			
 		Integer timoutNum = null;
 		if(StringUtils.hasText(errorNumTimeOut)){
@@ -129,21 +112,29 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 	    ICacheClient jedis = MCSClientFactory.getCacheClient("com.ai.opt.uac.cache.logincount.cache");
 
 	    String requestIp =jedis.get(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+bssCredentials.getId());  
-	    Integer errorNum =0;
-	   if( (boolean)jedis.exists(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+requestIp)){
-		   errorNum =Integer.valueOf( jedis.get(CustomLoginFlowUrlHandler.CAS_REDIS_PREFIX+requestIp));
-	   }
-	 
-	   logger.error("=====================errorNum========"+errorNum+"==============================");
-	   logger.error("=====================errorNumber========"+errorNumberCCS+"==============================");
+	    String errorNumstr =bssCredentials.getErrorNum();
+	    Integer errorNum = null;
+		if(StringUtils.hasText(errorNumstr)){
+			errorNum = Integer.valueOf(errorNumstr);
+		}	
+		//获取配置中心登录失败次数
+		String errorNumConfig =bssCredentials.getErrorNumCCS();
+		
+		
+		Integer errorNumberCCS = null;
+		if(StringUtils.hasText(errorNumConfig)){
+			errorNumberCCS = Integer.valueOf(errorNumConfig);
+		}	
+	   logger.info("=====================errorNum========"+errorNum+"==============================");
+	   logger.info("=====================errorNumber========"+errorNumberCCS+"==============================");
 
 	    boolean captchaShow = false;
-	    logger.error("=====================errorNum<=errorNumber========"+(errorNum<=errorNumberCCS)+"==============================");
+	    logger.info("=====================errorNum<=errorNumber========"+(errorNum<=errorNumberCCS)+"==============================");
 
 	    if(errorNum>=errorNumberCCS){
 	    	captchaShow = true;
 	    }
-	    logger.error("=====================captchaShow========"+captchaShow+"==============================");
+	    logger.info("=====================captchaShow========"+captchaShow+"==============================");
 
 		//用户名非空校验
 		if(!StringUtils.hasText(username)){
@@ -257,6 +248,7 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 			bssCredentials.setEmail(user.getEmail());
 			bssCredentials.setLoginName(user.getLoginName());
 			bssCredentials.setDomainname(user.getDomainname());
+			bssCredentials.setErrorNum(errorNum.toString());
 		}
 		/*catch (IllegalAccessException | InvocationTargetException e) {
 			logger.error("从user拷贝属性到bssCredentials出错",e);

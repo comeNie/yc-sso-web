@@ -34,6 +34,7 @@ request.setAttribute("citic_help_index_url",citic_help_index_url ); */
     var _base = "${_base}";
     var _i18n_res = "${i18nRes}";
     var currentLan = "<%=response.getLocale()%>";
+    var _language = "<%=request.getLocale().getLanguage()%>";
 </script>
 <script src="${_base}/resources/spm_modules/jquery/1.9.1/jquery.js"></script>
 <script src="${_base}/resources/spm_modules/bootstrap/dist/js/bootstrap.js"></script>

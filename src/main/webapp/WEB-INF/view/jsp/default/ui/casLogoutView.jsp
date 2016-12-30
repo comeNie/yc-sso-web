@@ -8,6 +8,8 @@
 <title>译云单点登录</title>
 <!--Support IE Text -->
 <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<meta name="viewport"
+	content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 </head>
 <body>
 <%@include file="/inc/head.jsp" %>

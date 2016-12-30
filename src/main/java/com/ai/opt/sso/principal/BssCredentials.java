@@ -31,11 +31,19 @@ public class BssCredentials extends RememberMeUsernamePasswordCredential {
     
     private String errorNumCCS;
     
+    private String errorNum;
+    
     
     private String errorNumTimeOutCCS;
     
     
-    public String getErrorNumTimeOutCCS() {
+    public String getErrorNum() {
+		return errorNum;
+	}
+	public void setErrorNum(String errorNum) {
+		this.errorNum = errorNum;
+	}
+	public String getErrorNumTimeOutCCS() {
 		return errorNumTimeOutCCS;
 	}
 	public void setErrorNumTimeOutCCS(String errorNumTimeOutCCS) {

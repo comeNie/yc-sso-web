@@ -57,9 +57,19 @@ public class AccountInfoData implements Serializable{
      */
     private String state;
     
+    private String errorNum;
+    
 	
 	
-    public String getState() {
+    public String getErrorNum() {
+		return errorNum;
+	}
+
+	public void setErrorNum(String errorNum) {
+		this.errorNum = errorNum;
+	}
+
+	public String getState() {
         return state;
     }
 

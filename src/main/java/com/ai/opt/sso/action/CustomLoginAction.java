@@ -128,6 +128,13 @@ public class CustomLoginAction  {
         	BssCredentials rmupc = (BssCredentials) credential;  
             // 从session中取出生成验证码的时候就保存在session中的验证码  
             String sessionCode = (String) WebUtils.getHttpServletRequest(context).getSession().getAttribute(code);  
+            String errorNumView = (String) WebUtils.getHttpServletRequest(context).getParameter("errorNum");
+            String errorNumCSS = (String) WebUtils.getHttpServletRequest(context).getParameter("errorNumCCS");
+            
+            String errorNumTimeOutCCS = (String) WebUtils.getHttpServletRequest(context).getParameter("errorNumTimeOutCCS");
+            rmupc.setErrorNum(errorNumView);
+            rmupc.setErrorNumCCS(errorNumCSS);
+            rmupc.setErrorNumTimeOutCCS(errorNumTimeOutCCS);
         	String errorNumConfig="";
     		try {
     			errorNumConfig = CCSClientFactory.getDefaultConfigClient().get("/errorNum");
@@ -191,7 +198,7 @@ public class CustomLoginAction  {
                 return newEvent(ERROR, e);
             }
         }
-
+    
         try {
             final String tgtId = this.centralAuthenticationService.createTicketGrantingTicket(credential);
             WebUtils.putTicketGrantingTicketInFlowScope(context, tgtId);

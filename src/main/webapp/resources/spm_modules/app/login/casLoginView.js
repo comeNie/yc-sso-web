@@ -1,5 +1,5 @@
+
 $(function(){
-	
 
 	jQuery.i18n.properties({
         name: ['messages'],path:_i18n_res, mode: 'both', language: currentLan
@@ -75,6 +75,10 @@ function resetErrMsg(){
  
 function validate() {
 
+
+	jQuery.i18n.properties({
+        name: ['messages'],path:_i18n_res, mode: 'map', language: _language
+    });
 	var username=document.getElementById("username").value;
 	var password=document.getElementById("password").value;
 	var errorNumCCS=document.getElementById("errorNumCCS").value;
@@ -82,13 +86,14 @@ function validate() {
 
 	try {
 		if (isNull(username)) {
-			showErrMsg("请输入用户名");
+			
+			showErrMsg($.i18n.prop('authenticationFailure.UsernameIsNullException'));
 			return false;
 		}else{
 			resetErrMsg();
 		}
 		if (isNull(password)) {
-			showErrMsg("请输入密码");
+			showErrMsg($.i18n.prop('authenticationFailure.PasswordIsNullException'));
 			return false;
 		}else{
 			resetErrMsg();
@@ -97,7 +102,7 @@ function validate() {
 		if(errorNum>=errorNumCCS){
 			var captcha=document.getElementById("captchaCode").value;		
 			if (isNull(captcha)) {
-				showErrMsg("请输入验证码");
+				showErrMsg($.i18n.prop('authenticationFailure.CaptchaIsNullException '));
 				return false;
 			}else{
 				resetErrMsg();
