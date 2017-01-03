@@ -2,7 +2,7 @@
 $(function(){
 
 	jQuery.i18n.properties({
-        name: ['messages'],path:_i18n_res, mode: 'both', language: currentLan
+        name: ['messages'],path:_i18n_res, mode: 'both', language: _language
     });
 	
 	if (self != top) {  
@@ -75,7 +75,6 @@ function resetErrMsg(){
  
 function validate() {
 
-
 	jQuery.i18n.properties({
         name: ['messages'],path:_i18n_res, mode: 'map', language: _language
     });
@@ -102,7 +101,7 @@ function validate() {
 		if(errorNum>=errorNumCCS){
 			var captcha=document.getElementById("captchaCode").value;		
 			if (isNull(captcha)) {
-				showErrMsg($.i18n.prop('authenticationFailure.CaptchaIsNullException '));
+				showErrMsg($.i18n.prop('authenticationFailure.CaptchaIsNullException'));
 				return false;
 			}else{
 				resetErrMsg();

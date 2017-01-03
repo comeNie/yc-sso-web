@@ -1,7 +1,7 @@
 <%@page import="com.ai.opt.sdk.components.ccs.CCSClientFactory"%>
 <%@page import="com.ai.opt.uac.web.constants.Constants"%>
 <%@page import="com.ai.opt.sdk.components.mcs.MCSClientFactory"%>
-
+<%@page import="java.util.Locale" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -34,7 +34,12 @@ request.setAttribute("citic_help_index_url",citic_help_index_url ); */
     var _base = "${_base}";
     var _i18n_res = "${i18nRes}";
     var currentLan = "<%=response.getLocale()%>";
-    var _language = "<%=request.getLocale().getLanguage()%>";
+    
+    <%
+    Locale _locale = (Locale)request.getAttribute("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE");
+
+    %>
+    var _language = "<%=_locale%>";
 </script>
 <script src="${_base}/resources/spm_modules/jquery/1.9.1/jquery.js"></script>
 <script src="${_base}/resources/spm_modules/bootstrap/dist/js/bootstrap.js"></script>
