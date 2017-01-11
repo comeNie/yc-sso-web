@@ -1,10 +1,16 @@
 
 $(function(){
-
-	jQuery.i18n.properties({
-        name: ['messages'],path:_i18n_res, mode: 'both', language: _language
-    });
 	
+	$.i18n.properties({//加载资浏览器语言对应的资源文件
+		name: ["messages"], //资源文件名称，可以是数组
+		path: _i18n_res, //资源文件路径
+		mode: 'both',
+        cache: true,
+		language: _language,
+        checkAvailableLanguages: true,
+		async: false
+	});
+
 	if (self != top) {  
 	    var messenger = new Messenger('mainFrame', 'MgmtMessage'),
 	    input = document.getElementById('message');
@@ -30,7 +36,6 @@ $(function(){
 	
 });
 
-
 function showErrMsg(msg){
 	$("#errorMsg").html(msg);
 	//$("div.loginErr").show();
@@ -52,9 +57,7 @@ function resetErrMsg(){
   }//end of encryPwd
   
   function dologin() {
-
   	if(validate()){ 
-
 		var inputPassword = document.getElementById("password").value;
 		/*var onceCode = "AIOPT_SALT_KEY";
 		var passwordMd5 = hex_md5(onceCode
@@ -73,19 +76,22 @@ function resetErrMsg(){
 	
 }//end of dologin
  
+
 function validate() {
-
-	jQuery.i18n.properties({
-        name: ['messages'],path:_i18n_res, mode: 'map', language: _language
-    });
-	var username=document.getElementById("username").value;
-	var password=document.getElementById("password").value;
-	var errorNumCCS=document.getElementById("errorNumCCS").value;
-	var errorNum = document.getElementById("errorNum").value;
-
+	var username=$("#username").val();
+	var password=$("#password").val();
+	var errorNumCCS=$("#errorNumCCS").val();
+	var errorNum = $("#errorNum").val();
+    if(username=="Username/Mobile/Email"){
+    	username="";
+		$("#username").val("");
+    }
+    if(password=="Password"){
+    	password="";
+		$("#password").val("");
+    }
 	try {
-		if (isNull(username)) {
-			
+		if (isNull(username)) {			
 			showErrMsg($.i18n.prop('authenticationFailure.UsernameIsNullException'));
 			return false;
 		}else{
@@ -99,7 +105,11 @@ function validate() {
 		}
 
 		if(errorNum>=errorNumCCS){
-			var captcha=document.getElementById("captchaCode").value;		
+			var captcha=$("#captchaCode").val();	
+			if(captcha=="Verification code"){
+				captcha="";
+				$("#captchaCode").val("");
+		    }
 			if (isNull(captcha)) {
 				showErrMsg($.i18n.prop('authenticationFailure.CaptchaIsNullException'));
 				return false;

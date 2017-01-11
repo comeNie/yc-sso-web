@@ -41,7 +41,8 @@ request.setAttribute("citic_help_index_url",citic_help_index_url ); */
     %>
     var _language = "<%=_locale%>";
 </script>
-<script src="${_base}/resources/spm_modules/jquery/1.9.1/jquery.js"></script>
+<%-- <script src="${_base}/theme/yc/scripts/modular/jquery-1.11.1.min.js"></script> --%>
+<script src="${_base}/resources/spm_modules/jquery/1.9.1/jquery.min.js"></script>
 <script src="${_base}/resources/spm_modules/bootstrap/dist/js/bootstrap.js"></script>
 <script src="${_base}/resources/spm_modules/seajs/2.3.0/dist/sea.js"></script>
 <script src="${_base}/resources/spm_modules/seajs/seajs-css.js"></script>
