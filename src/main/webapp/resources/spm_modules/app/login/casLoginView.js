@@ -6,9 +6,9 @@ $(function(){
 		path: _i18n_res, //资源文件路径
 		mode: 'both',
         cache: true,
-		language: _language,
-        checkAvailableLanguages: true,
-		async: false
+		language: _language
+        //checkAvailableLanguages: true,
+		//async: false
 	});
 
 	if (self != top) {  

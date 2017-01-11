@@ -37,23 +37,28 @@ request.setAttribute("citic_help_index_url",citic_help_index_url ); */
     
     <%
     Locale _locale = (Locale)request.getAttribute("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE");
-
+	if(_locale==null){
+		//zh_CN
+		_locale=Locale.SIMPLIFIED_CHINESE;
+	}
     %>
     var _language = "<%=_locale%>";
+
 </script>
-<%-- <script src="${_base}/theme/yc/scripts/modular/jquery-1.11.1.min.js"></script> --%>
+<%-- <script src="${_base}/theme/yc/scripts/modular/jquery-1.10.2.js"></script> --%>
 <script src="${_base}/resources/spm_modules/jquery/1.9.1/jquery.min.js"></script>
-<script src="${_base}/resources/spm_modules/bootstrap/dist/js/bootstrap.js"></script>
+<%-- <script src="${_base}/resources/spm_modules/bootstrap/dist/js/bootstrap.js"></script>
 <script src="${_base}/resources/spm_modules/seajs/2.3.0/dist/sea.js"></script>
 <script src="${_base}/resources/spm_modules/seajs/seajs-css.js"></script>
-<script src="${_base}/resources/spm_modules/app/core/config.js"></script>
+<script src="${_base}/resources/spm_modules/app/core/config.js"></script> --%>
 <script  type="text/javascript" src="${_base}/theme/yc/js/placeholder.min.js"></script>
 <script>
     $(document).ready(function(){
         $("input").placeholder();
     });
 </script>
-<script src="${_base}/resources/spm_modules/jquery-i18n/1.2.2/jquery.i18n.properties.min.js"></script>
+<script src="${_base}/resources/spm_modules/jquery-i18n/1.2.2/jquery.i18n.properties.js"></script>
+
 <!-- UED style begin -->
     <link href="${_base}/theme/yc/css/bootstrap/font-awesome.css" rel="stylesheet" type="text/css">
     <link href="${_base}/theme/yc/css/iconfont.css" rel="stylesheet" type="text/css">
