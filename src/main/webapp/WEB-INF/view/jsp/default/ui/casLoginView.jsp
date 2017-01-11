@@ -72,11 +72,11 @@
 									  <spring:message code="placeholder.verifycode.tip" var="verifycodetip"/>
 								      <input type="text" class="int-text logon-yz-int radius" id="captchaCode" 	
 													tabindex="3" name="captchaCode" path="captchaCode" onkeydown="encryptCaptcha(event)"
-													placeholder="${verifycodetip}"  style="width:250px"> 
+													placeholder="${verifycodetip}"  style="width:225px"> 
 								</p>
 								<p>
 									<spring:message code="dom.lables.codeagain" var="dom.lables.codeagain"/>
-								      <img title="${dom.lables.codeagain}" src="${_base}/captcha/getImageVerifyCode" id="pictureVitenfy" onclick="reloadImage('${_base}/captcha/getImageVerifyCode');" style="height:44px;width:84px;margin-left:2px">
+								      <img title="${dom.lables.codeagain}" src="${_base}/captcha/getImageVerifyCode" id="pictureVitenfy" onclick="reloadImage('${_base}/captcha/getImageVerifyCode');" style="margin-left:2px">
 								 </p>
 							</li>
 							</c:if>

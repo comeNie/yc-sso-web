@@ -10,8 +10,9 @@
  *              by Keith Wood (kbwood{at}iinet.com.au) June 2007
  *
  *****************************************************************************/
-define("jquery-i18n/1.2.2/jquery.i18n.properties", [], function(require, exports, module) {
-  (function ($) {
+//define("jquery-i18n/1.2.2/jquery.i18n.properties", [], function(require, exports, module) {
+ 
+(function ($) {
     $.i18n = {};
 
     /** Map holding bundle keys (if mode: 'map') */
@@ -552,4 +553,5 @@ define("jquery-i18n/1.2.2/jquery.i18n.properties", [], function(require, exports
     };
 
   })(jQuery);
-});
+
+//});

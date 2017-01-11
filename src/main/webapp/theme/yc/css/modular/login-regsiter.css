@@ -25,7 +25,7 @@
 .logon-int{width:280px;height:42px;border:none;background:#fff;line-height:42px;}
 .logon-int:hover{border:none}
 .login-form ul .int-border .int-icon{width:53px;text-align:center;line-height:44px;}
-.logon-yz-int{width:200px;height:44px;border:1px solid #e6e6e6;padding-left:20px;}
+.logon-yz-int{width:215px;height:44px;border:1px solid #e6e6e6;padding-left:20px;margin-right:10px;}
 .login-form ul li a{color:#2361ea;font-size:12px;}
 .login-form ul li .right{float:right}
 .login-form ul li .line{width:233px;border-bottom:1px solid #e6e6e6;margin:10px 0 0 20px;}
@@ -59,7 +59,7 @@
 .register-right ul .alink{line-height:15px;}
 .register-right ul .alink,.register-right ul .alink a{font-size:12px}
 .register-right ul .alink a{color:#2361ea}
-.register-right ul .alink .right{float:right;margin-right:20px;}
+.register-right ul .alink .right{float:right;/*margin-right:20px;*/}
 /**注册邮箱验证**/
 .verification{width:100%;float:left;padding-bottom:160px;}
 .verification ul{width:100%;float:left;margin-top:160px;}

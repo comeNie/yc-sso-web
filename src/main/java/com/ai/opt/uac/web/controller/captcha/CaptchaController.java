@@ -30,7 +30,7 @@ public class CaptchaController {
 	@RequestMapping("/getImageVerifyCode")
 	public void getImageVerifyCode(HttpServletRequest request, HttpServletResponse response) {
 		String cacheKey = Register.CACHE_KEY_VERIFY_PICTURE + request.getSession().getId();
-		BufferedImage image = VerifyUtil.getImageVerifyCode(Register.CACHE_NAMESPACE, cacheKey, 100, 38);
+		BufferedImage image = VerifyUtil.getImageVerifyCode(Register.CACHE_NAMESPACE, cacheKey, 100, 44);
 		try {
 			ImageIO.write(image, "PNG", response.getOutputStream());
 		} catch (IOException e) {
