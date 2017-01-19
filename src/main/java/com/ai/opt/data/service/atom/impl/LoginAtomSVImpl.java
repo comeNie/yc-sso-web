@@ -2,11 +2,12 @@ package com.ai.opt.data.service.atom.impl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.data.dao.mapper.bo.UcMembers;
 import com.ai.opt.data.dao.mapper.bo.UcMembersCriteria;
+import com.ai.opt.data.dao.mapper.bo.UcMembersCriteria.Criteria;
 import com.ai.opt.data.dao.mapper.factory.MapperFactory;
 import com.ai.opt.data.dao.mapper.interfaces.UcMembersMapper;
 import com.ai.opt.data.service.atom.interfaces.ILoginAtomSV;
@@ -47,6 +48,29 @@ public class LoginAtomSVImpl implements ILoginAtomSV {
         }
         return null;
     }
+
+	@Override
+	public UcMembers queryByUserNamePhoneEmail(String loginname) throws SystemException {
+		UcMembersCriteria example = new UcMembersCriteria();
+        if (!StringUtil.isBlank(loginname)) {
+        	Criteria orUsername = example.or();
+			orUsername.andUsernameEqualTo(loginname);
+			orUsername.andEnablestatusEqualTo("1");
+			Criteria orMobile = example.or();
+			orMobile.andMobilephoneEqualTo(loginname);
+			orMobile.andEnablestatusEqualTo("1");
+			Criteria orEmail = example.or();
+			orEmail.andEmailEqualTo(loginname);
+			orEmail.andEnablestatusEqualTo("1");
+        }
+
+        UcMembersMapper ucMembersMapper = MapperFactory.getUcMembersMapper();
+        List<UcMembers> list = ucMembersMapper.selectByExample(example);
+        if (!CollectionUtil.isEmpty(list)) {
+            return list.get(0);
+        }
+        return null;
+	}
 
 
 }

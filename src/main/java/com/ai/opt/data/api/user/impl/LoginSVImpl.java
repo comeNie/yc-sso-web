@@ -29,7 +29,7 @@ public class LoginSVImpl implements ILoginSV {
             throws BusinessException,SystemException {
         iVoValidateSV.validateLogin(username);
         // 判断用户名是手机还是邮箱
-        boolean isEmial = RegexUtils.checkIsEmail(username);
+        /* boolean isEmial = RegexUtils.checkIsEmail(username);
         boolean isPhone = RegexUtils.checkIsPhone(username);
         UcMembers account = new UcMembers();
         if (isPhone == true) {
@@ -38,8 +38,8 @@ public class LoginSVImpl implements ILoginSV {
             account.setEmail(username);
         }else{
             account.setUsername(username); 
-        }
-        UcMembers sysUser = iLoginBusiSV.queryByUserName(account);
+        }*/
+        UcMembers sysUser = iLoginBusiSV.queryByUserNamePhoneEmail(username);
         // 组织返回对象
         UserLoginResponse response = new UserLoginResponse();
         if (sysUser != null) {
@@ -52,11 +52,6 @@ public class LoginSVImpl implements ILoginSV {
 			response.setSalt(sysUser.getSalt());
 			response.setDomainname(sysUser.getDomainName());
 			response.setEmailcheck(sysUser.getEmailcheck());
-			//add by zhouxh
-//			response.setLoginFlag(sysUser.getLoginFlag());
-//			response.setDelFlag(sysUser.getDelFlag());
-//			response.setEffectiveDate(sysUser.getEffectiveDate());
-//			response.setEffectiveDate(sysUser.getEffectiveDate());
 			
             ResponseHeader responseHeaders = new ResponseHeader(true, ResultCode.SUCCESS_CODE,
                     "成功");

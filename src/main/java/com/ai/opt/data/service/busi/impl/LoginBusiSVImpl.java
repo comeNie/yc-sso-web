@@ -22,4 +22,9 @@ public class LoginBusiSVImpl implements ILoginBusiSV {
 
     }
 
+	@Override
+	public UcMembers queryByUserNamePhoneEmail(String loginname) throws BusinessException {
+		return iLoginAtomSV.queryByUserNamePhoneEmail(loginname);
+	}
+
 }
