@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <%@page import="com.ai.opt.uac.web.constants.Constants"%>
 <%@page import="com.ai.opt.sdk.components.mcs.MCSClientFactory"%>
 <%@page import="com.ai.opt.sdk.components.ccs.CCSClientFactory"%>
@@ -10,14 +9,14 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
-<html lang="zh-cn">
+<!DOCTYPE html>
+<html>
 <head>
-<%@ include file="/inc/inc.jsp"%>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>login</title>
+	<%@ include file="/inc/inc.jsp"%>
 	<script type="text/javascript" src="${_baasBase }/js/datacheck.js" ></script>
 	<script language="javascript" src="${pageContext.request.contextPath}/resources/spm_modules/app/login/messenger.js"></script>  
 	<script language="javascript" src="${pageContext.request.contextPath}/resources/spm_modules/app/login/casLoginView.js"></script>
