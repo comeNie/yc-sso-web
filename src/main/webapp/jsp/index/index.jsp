@@ -1,17 +1,29 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@page import="com.ai.opt.uac.web.constants.Constants"%>
+<%@page import="com.ai.opt.sdk.components.mcs.MCSClientFactory"%>
+<%@page import="com.ai.opt.sdk.components.ccs.CCSClientFactory"%>
+<%@page import="java.net.URLDecoder"%>
+<%@page import="java.util.Date"%>
+<%@ page pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!DOCTYPE html>
 <html>
 <head>
-<%@ include file="/inc/inc.jsp"%>
-<title>译云单点登录</title>
-<!--Support IE Text -->
-<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
-</head>
-<body>
-<%@include file="/inc/head.jsp" %>
-	
-<div class="container login-bj">
-<%-- <%@include file="/inc/foot.jsp" %> --%>
-</div>
+	<meta property="wb:webmaster" content="d8bcb31352dcbeda" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>login</title>
+    <%@ include file="/inc/inc.jsp"%>
+<body class="login-body">
+		<div class="login-big"> 
+			<div class="login-headr"><p><a href="${default_index_url}"><img src="${_baasBase }/images/login-logo.png" /></a></p><p class="word"><spring:message code="dom.lables.accountlongin"/></p></div>
+			<div class="login-wrapper">
+				<div class="login-left"><img src="${_baasBase }/images/login-bj.png"></div>
+			</div>
+		</div>
 </body>
 </html>
