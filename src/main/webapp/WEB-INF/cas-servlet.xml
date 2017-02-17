@@ -255,4 +255,10 @@
 		  p:centralAuthenticationService-ref="centralAuthenticationService"
 		  p:ticketGrantingTicketCookieGenerator-ref="ticketGrantingTicketCookieGenerator"/>
   <context:component-scan base-package="com.ai.opt.sso.service"/>
+  
+  
+  <bean id="clientAction" class="org.jasig.cas.support.pac4j.web.flow.ClientAction">
+	    <constructor-arg index="0" ref="centralAuthenticationService"/>
+	    <constructor-arg index="1" ref="clients"/>
+  </bean>
 </beans>

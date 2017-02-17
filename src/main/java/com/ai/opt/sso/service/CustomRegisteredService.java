@@ -18,7 +18,9 @@ import java.util.regex.Pattern;
  */
 public class CustomRegisteredService extends RegexRegisteredService{
 
-    private static final Logger LOG = LoggerFactory.getLogger(CustomRegisteredService.class);
+	private static final long serialVersionUID = -2167050445089591533L;
+
+	private static final Logger LOG = LoggerFactory.getLogger(CustomRegisteredService.class);
 
     private static String[] whiteList;
 
@@ -39,7 +41,7 @@ public class CustomRegisteredService extends RegexRegisteredService{
 
     @Override
     public boolean matches(Service service) {
-        LOG.error("service=["+service.getId()+"]开始进行认证");
+        LOG.error("service=["+service.getId()+"]开始进行白名单认证");
         if(super.matches(service)){//正则表达式认证成功，进行自定义service白名单认证
             Pattern p =  Pattern.compile("//([^/]+)(/.*)+");
             Matcher matcher = p.matcher(service.getId());
@@ -50,12 +52,12 @@ public class CustomRegisteredService extends RegexRegisteredService{
                 }
                 LOG.error("service=["+service.getId()+"]中的host部分为："+host);
                 if(IPHelper.isWhiteList(host,whiteList)){
-                    LOG.error("service=["+service.getId()+"]认证通过");
+                    LOG.error("service=["+service.getId()+"]白名单认证通过");
                     return true;
                 }
             }
         }
-        LOG.error("service=["+service.getId()+"]认证失败");
+        LOG.error("service=["+service.getId()+"]白名单认证失败");
         return false;
     }
 }

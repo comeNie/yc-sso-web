@@ -136,4 +136,24 @@
 
     <!-- The scheduler bean wires up any triggers that define scheduled tasks -->
     <bean id="scheduler" class="org.jasig.cas.util.AutowiringSchedulerFactoryBean"/>
+    
+    <!-- thirdlogin start gucl -->
+    <bean id="clients" class="org.pac4j.core.client.Clients">
+		<property name="callbackUrl" value="https://login.nmall.com/cas/login" />
+		<property name="clients">
+			<list>
+				<ref bean="weiXin" />
+				<ref bean="qq" />
+			</list>
+		</property>
+	</bean>
+	<bean id="weiXin" class="org.jasig.cas.support.pac4j.plugin.weixin.WeiXinClient">
+		<property name="key" value="yourkey" />
+		<property name="secret" value="yousecret" />
+	</bean>
+	<bean id="qq" class="org.jasig.cas.support.pac4j.plugin.qq.QqClient">
+		<property name="key" value="yourkey" />
+		<property name="secret" value="yousecret" />
+	</bean>
+	<!-- thirdlogin end gucl -->
 </beans>

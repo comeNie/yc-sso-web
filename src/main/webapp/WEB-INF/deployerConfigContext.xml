@@ -186,6 +186,9 @@
             		<value>mobile</value>
             		<value>email</value>
             		<value>domainname</value>
+            		<!-- weixin -->
+				    <value>openid</value>
+				    <value>nickname</value>
             	</list>
             </property>
         </bean>

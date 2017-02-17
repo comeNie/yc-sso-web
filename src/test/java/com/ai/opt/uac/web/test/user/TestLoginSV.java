@@ -9,7 +9,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ai.opt.base.exception.RPCSystemException;
 import com.ai.opt.data.api.user.interfaces.ILoginSV;
+import com.ai.opt.data.api.user.param.ThirdUserQueryRequest;
 import com.ai.opt.data.api.user.param.UserLoginResponse;
+import com.ai.opt.data.constants.ThirdUserConstants;
+import com.ai.opt.data.dao.mapper.bo.UcMembers;
 import com.ai.opt.sdk.util.Md5Encoder;
 import com.alibaba.fastjson.JSON;
 
@@ -33,5 +36,22 @@ public class TestLoginSV {
     public void testSSOa() throws RPCSystemException{
         String name = "123456";
         System.out.println("result="+Md5Encoder.encodePassword(name));
+    }
+	
+	
+	@Test
+    public void testBindThirdUser() throws RPCSystemException{
+		UcMembers ucMembers=new UcMembers();
+		ucMembers.setUsersource(ThirdUserConstants.UserSource.WEIXIN);
+		ucMembers.setThirduid("2");
+		ucMembers.setUsername("WEIXIN_"+2);
+		String uid=iLoginSV.bindThirdUser(ucMembers);
+        System.out.println("uid="+uid);
+        
+        ThirdUserQueryRequest thirdUser=new ThirdUserQueryRequest();
+        thirdUser.setUsersource(ThirdUserConstants.UserSource.WEIXIN);
+        thirdUser.setThirduid("2");
+        UcMembers thirdUserDb=iLoginSV.queryThirdUser(thirdUser);
+        System.out.println("thirdUserDb="+JSON.toJSONString(thirdUserDb));
     }
 }

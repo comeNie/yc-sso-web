@@ -8,7 +8,9 @@ import javax.ws.rs.core.MediaType;
 
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
+import com.ai.opt.data.api.user.param.ThirdUserQueryRequest;
 import com.ai.opt.data.api.user.param.UserLoginResponse;
+import com.ai.opt.data.dao.mapper.bo.UcMembers;
 
 /**
  * 登录服务<br>
@@ -28,7 +30,7 @@ public interface ILoginSV {
      * @return
      * @throws BusinessException,SystemException
      * @author gucl
-     * @ApiCode CITIC_UAC_0001
+     * @ApiCode SSO_0001
      * @RestRelativeURL userlogin/queryUserByUserName
      */
 	@POST
@@ -36,4 +38,28 @@ public interface ILoginSV {
     UserLoginResponse queryUserByUserName(String username) throws BusinessException,SystemException;
 
 
+	/**
+	 * 插入第三方登录的用户信息
+	 * @param ucMembers
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author gucl
+	 */
+	@POST
+	@Path("/bindThirdUser")
+	String bindThirdUser(UcMembers ucMembers) throws BusinessException,SystemException;
+	/**
+	 * 查询第三方登录的用户信息（依据usersource和thirduid查询）
+	 *  
+	 * @param thirdUser  第三方系统用户的usersource和thirduid
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author gucl
+	 */
+	@POST
+	@Path("/queryThirdUser")
+	UcMembers queryThirdUser(ThirdUserQueryRequest thirdUser) throws BusinessException,SystemException;
+	
 }

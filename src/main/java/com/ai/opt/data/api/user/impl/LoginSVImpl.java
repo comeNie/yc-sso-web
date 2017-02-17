@@ -7,13 +7,16 @@ import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.data.api.user.interfaces.ILoginSV;
+import com.ai.opt.data.api.user.param.ThirdUserQueryRequest;
 import com.ai.opt.data.api.user.param.UserLoginResponse;
+import com.ai.opt.data.constants.AccountExceptCode;
 import com.ai.opt.data.constants.AccountConstants.ResultCode;
 import com.ai.opt.data.dao.mapper.bo.UcMembers;
 import com.ai.opt.data.service.busi.interfaces.ILoginBusiSV;
 import com.ai.opt.data.service.busi.interfaces.IVoValidateSV;
 import com.ai.opt.data.util.RegexUtils;
 import com.ai.opt.sdk.util.BeanUtils;
+import com.ai.opt.sdk.util.StringUtil;
 import com.alibaba.dubbo.config.annotation.Service;
 
 @Service
@@ -63,6 +66,34 @@ public class LoginSVImpl implements ILoginSV {
         }
         return response;
     }
+
+	@Override
+	public String bindThirdUser(UcMembers ucMembers) throws BusinessException, SystemException {
+		if(ucMembers==null){
+			throw new BusinessException(AccountExceptCode.ErrorCode.PARAM_NULL_ERROR, "参数对象为空");
+		}
+		if(StringUtil.isBlank(ucMembers.getUsersource())){
+			throw new BusinessException(AccountExceptCode.ErrorCode.PARAM_NULL_ERROR, "用户来源为空");
+		}
+		if(StringUtil.isBlank(ucMembers.getThirduid())){
+			throw new BusinessException(AccountExceptCode.ErrorCode.PARAM_NULL_ERROR, "第三方用户ID为空");
+		}
+		return iLoginBusiSV.saveThirdUser(ucMembers);
+	}
+
+	@Override
+	public UcMembers queryThirdUser(ThirdUserQueryRequest thirdUser) throws BusinessException, SystemException {
+		if(thirdUser==null){
+			throw new BusinessException(AccountExceptCode.ErrorCode.PARAM_NULL_ERROR, "参数对象为空");
+		}
+		if(StringUtil.isBlank(thirdUser.getUsersource())){
+			throw new BusinessException(AccountExceptCode.ErrorCode.PARAM_NULL_ERROR, "用户来源为空");
+		}
+		if(StringUtil.isBlank(thirdUser.getThirduid())){
+			throw new BusinessException(AccountExceptCode.ErrorCode.PARAM_NULL_ERROR, "第三方用户ID为空");
+		}
+		return iLoginBusiSV.queryThirdUser(thirdUser.getUsersource(),thirdUser.getThirduid());
+	}
 
 
 }
