@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class IndexController {
 
-    //@RequestMapping("/index")
+    @RequestMapping("/index")
     public ModelAndView index(HttpServletRequest request) {
     	/*GnTenantConditon cond=new GnTenantConditon();
     	cond.setTenantId("BIS-ST");
