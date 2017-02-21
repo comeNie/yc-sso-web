@@ -50,7 +50,6 @@ public class WeiXinClient extends BaseOAuth20Client<WeiXinProfile> {
 
     @Override
     protected void internalInit() {
-        super.internalInit();
         WeiXinApi20 api = new WeiXinApi20();
         this.service = new WeiXinOAuth20ServiceImpl(api, new OAuthConfig(this.key, this.secret, this.callbackUrl,SignatureType.Header, null, null),
                                                                         this.connectTimeout, this.readTimeout, this.proxyHost,this.proxyPort);

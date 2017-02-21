@@ -149,14 +149,8 @@
 		</property>
 	</bean>
 	<bean id="weiXin" class="org.jasig.cas.support.pac4j.plugin.weixin.WeiXinClient">
-		<!-- 此处的key和secret仅用作BaseOAuthClient的必填校验，实际值存储在配置中心 -->
-		<property name="key" value="wxe5a67ee0fb5e181f" />
-		<property name="secret" value="25bd1d5a4ac75618a7ed2cbd46417800" />
 	</bean>
 	<bean id="sinaWeibo" class="org.jasig.cas.support.pac4j.plugin.sinaweibo.SinaWeiboClient">
-		<!-- 此处的key和secret仅用作BaseOAuthClient的必填校验，实际值存储在配置中心 -->
-		<property name="key" value="606577360" />
-		<property name="secret" value="2547eb81b19310ffbda5f83043817136" />
 	</bean>
 	<!-- thirdlogin end gucl -->
 </beans>

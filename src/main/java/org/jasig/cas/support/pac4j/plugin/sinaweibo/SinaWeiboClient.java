@@ -49,7 +49,6 @@ public class SinaWeiboClient extends BaseOAuth20Client<SinaWeiboProfile> {
 
     @Override
     protected void internalInit() {
-        super.internalInit();
         SinaWeiboApi20 api = new SinaWeiboApi20();
         this.service = new SinaWeiboOAuth20ServiceImpl(api, new OAuthConfig(this.key, this.secret, this.callbackUrl,SignatureType.Header, null, null),
                                                                         this.connectTimeout, this.readTimeout, this.proxyHost,this.proxyPort);
