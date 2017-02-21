@@ -73,7 +73,7 @@ public class SinaWeiboClient extends BaseOAuth20Client<SinaWeiboProfile> {
 			String sinaWeiboUsername="SINAWEIBO_"+sinaWeiboId;
             /** 绑定账号到系统 */
 			UcMembers ucMembers=new UcMembers();
-			ucMembers.setUsersource(ThirdUserConstants.UserSource.WEIXIN);
+			ucMembers.setUsersource(ThirdUserConstants.UserSource.SINA);
 			ucMembers.setThirduid(sinaWeiboId);
 			ucMembers.setUsername(sinaWeiboUsername);
 			String uid=iLoginSV.bindThirdUser(ucMembers);
