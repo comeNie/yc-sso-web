@@ -1,5 +1,6 @@
 package org.jasig.cas.support.pac4j.plugin.sinaweibo;
 
+import org.jasig.cas.support.pac4j.plugin.common.ThirdLoginConfigUtil;
 import org.pac4j.core.client.BaseClient;
 import org.pac4j.core.context.WebContext;
 import org.pac4j.core.exception.HttpCommunicationException;
@@ -31,9 +32,15 @@ public class SinaWeiboClient extends BaseOAuth20Client<SinaWeiboProfile> {
 	private ILoginSV iLoginSV;
 
     public SinaWeiboClient(){
-    	setKey("606577360");
+    	String callbackurl=ThirdLoginConfigUtil.getCallBackUrl();
+    	String appid=ThirdLoginConfigUtil.getSinaWeiboConfig().getAppid();
+    	String secret=ThirdLoginConfigUtil.getSinaWeiboConfig().getSecret();
+    	setKey(appid);
+        setSecret(secret);
+        setCallbackUrl(callbackurl);
+    	/*setKey("606577360");
         setSecret("2547eb81b19310ffbda5f83043817136");
-        setCallbackUrl("http://ssotest.yeecloud.com/login");
+        setCallbackUrl("http://ssotest.yeecloud.com/login");*/
     }
 
     public SinaWeiboClient(final String key, final String secret){

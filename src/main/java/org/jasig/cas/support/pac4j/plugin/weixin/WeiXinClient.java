@@ -1,5 +1,6 @@
 package org.jasig.cas.support.pac4j.plugin.weixin;
 
+import org.jasig.cas.support.pac4j.plugin.common.ThirdLoginConfigUtil;
 import org.pac4j.core.client.BaseClient;
 import org.pac4j.core.context.WebContext;
 import org.pac4j.core.exception.HttpCommunicationException;
@@ -32,9 +33,15 @@ public class WeiXinClient extends BaseOAuth20Client<WeiXinProfile> {
 	private ILoginSV iLoginSV;
 
     public WeiXinClient(){
-    	setKey("wxe5a67ee0fb5e181f");
+    	String callbackurl=ThirdLoginConfigUtil.getCallBackUrl();
+    	String appid=ThirdLoginConfigUtil.getWeixinConfig().getAppid();
+    	String secret=ThirdLoginConfigUtil.getWeixinConfig().getSecret();
+    	setKey(appid);
+        setSecret(secret);
+        setCallbackUrl(callbackurl);
+    	/*setKey("wxe5a67ee0fb5e181f");
         setSecret("25bd1d5a4ac75618a7ed2cbd46417800");
-        setCallbackUrl("http://ssotest.yeecloud.com/login");
+        setCallbackUrl("http://ssotest.yeecloud.com/login");*/
     }
 
     public WeiXinClient(final String key, final String secret){
