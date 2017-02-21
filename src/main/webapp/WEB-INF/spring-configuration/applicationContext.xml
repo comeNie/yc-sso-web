@@ -139,21 +139,24 @@
     
     <!-- thirdlogin start gucl -->
     <bean id="clients" class="org.pac4j.core.client.Clients">
-		<property name="callbackUrl" value="https://login.nmall.com/cas/login" />
+        <!-- 此处的callbackUrl仅用作BaseOAuthClient的必填校验，实际值存储在配置中心 -->
+		<property name="callbackUrl" value="callbackUrl" />
 		<property name="clients">
 			<list>
 				<ref bean="weiXin" />
-				<ref bean="qq" />
+				<ref bean="sinaWeibo" />
 			</list>
 		</property>
 	</bean>
 	<bean id="weiXin" class="org.jasig.cas.support.pac4j.plugin.weixin.WeiXinClient">
-		<property name="key" value="yourkey" />
-		<property name="secret" value="yousecret" />
+		<!-- 此处的key和secret仅用作BaseOAuthClient的必填校验，实际值存储在配置中心 -->
+		<property name="key" value="wxe5a67ee0fb5e181f" />
+		<property name="secret" value="25bd1d5a4ac75618a7ed2cbd46417800" />
 	</bean>
-	<bean id="qq" class="org.jasig.cas.support.pac4j.plugin.qq.QqClient">
-		<property name="key" value="yourkey" />
-		<property name="secret" value="yousecret" />
+	<bean id="sinaWeibo" class="org.jasig.cas.support.pac4j.plugin.sinaweibo.SinaWeiboClient">
+		<!-- 此处的key和secret仅用作BaseOAuthClient的必填校验，实际值存储在配置中心 -->
+		<property name="key" value="606577360" />
+		<property name="secret" value="2547eb81b19310ffbda5f83043817136" />
 	</bean>
 	<!-- thirdlogin end gucl -->
 </beans>

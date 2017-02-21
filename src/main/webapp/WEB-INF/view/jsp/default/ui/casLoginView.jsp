@@ -87,7 +87,7 @@
 							<li>
 								<input type="button" class="btn btn-blue login-btn radius20" value="<spring:message code="dom.lables.signin"/>" onclick="javascript:dologin();">
 							</li>
-			<%-- 				<li>
+							<li>
 								<p><spring:message code="dom.lables.cooperative"/></p>
 								<p class="line"></p>
 							</li>
@@ -95,11 +95,11 @@
 								<p><a href="#" class="share share1"></a></p>
 								<p><a href="#" class="share share2"></a></p>
 								<p><a href="#" class="share share3"></a></p>
-								<p><a href="#" class="share share4"></a></p>
-								<p><a href="#" class="share share5"></a></p>
+								<p><a href="${SinaWeiboClientUrl}" class="share share4"></a></p>
+								<p><a href="${WeiXinClientUrl}" class="share share5"></a></p>
 								<p><a href="#" class="share share6"></a></p>
 								<p><a href="#" class="share share7 none-ma"></a></p>	
-							</li> --%>
+							</li>
 						</ul>
 					</div>
 					

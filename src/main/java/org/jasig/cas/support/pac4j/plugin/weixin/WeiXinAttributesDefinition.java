@@ -1,14 +1,15 @@
 package org.jasig.cas.support.pac4j.plugin.weixin;
 
+import org.jasig.cas.support.pac4j.plugin.common.BaseAttributesDefinition;
 import org.pac4j.core.profile.converter.Converters;
 import org.pac4j.oauth.profile.OAuthAttributesDefinition;
 
 /**
  * 用于接收微信返回的用户信息
- * @author b2c021
+ * @author gucl
  *
  */
-public class WeiXinAttributesDefinition extends OAuthAttributesDefinition {
+public class WeiXinAttributesDefinition extends BaseAttributesDefinition {
 
     public static final String OPEN_ID = "openid";
     public static final String NICK_NAME = "nickname";

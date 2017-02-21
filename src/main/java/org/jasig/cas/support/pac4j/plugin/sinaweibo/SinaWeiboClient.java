@@ -1,11 +1,10 @@
-package org.jasig.cas.support.pac4j.plugin.weixin;
+package org.jasig.cas.support.pac4j.plugin.sinaweibo;
 
 import org.pac4j.core.client.BaseClient;
 import org.pac4j.core.context.WebContext;
 import org.pac4j.core.exception.HttpCommunicationException;
 import org.pac4j.oauth.client.BaseOAuth20Client;
 import org.pac4j.oauth.credentials.OAuthCredentials;
-import org.pac4j.oauth.profile.JsonHelper;
 import org.scribe.model.OAuthConfig;
 import org.scribe.model.ProxyOAuthRequest;
 import org.scribe.model.Response;
@@ -14,77 +13,77 @@ import org.scribe.model.Token;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ai.opt.data.api.user.interfaces.ILoginSV;
-import com.ai.opt.data.api.user.param.ThirdUserQueryRequest;
 import com.ai.opt.data.constants.ThirdUserConstants;
 import com.ai.opt.data.dao.mapper.bo.UcMembers;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 
 /**
- * 此类用于处理CAS与微信的OAUTH通信
+ * 此类用于处理CAS与新浪微博的OAUTH通信
  * @author b2c021
  *
  */
-public class WeiXinClient extends BaseOAuth20Client<WeiXinProfile> {
+public class SinaWeiboClient extends BaseOAuth20Client<SinaWeiboProfile> {
 
-    private final static WeiXinAttributesDefinition WEI_XIN_ATTRIBUTES = new WeiXinAttributesDefinition();
+    private final static SinaWeiboAttributesDefinition SINA_WEIBO_ATTRIBUTES = new SinaWeiboAttributesDefinition();
 
     @Autowired
 	private ILoginSV iLoginSV;
 
-    public WeiXinClient(){
-    	setKey("wxe5a67ee0fb5e181f");
-        setSecret("25bd1d5a4ac75618a7ed2cbd46417800");
+    public SinaWeiboClient(){
+    	setKey("606577360");
+        setSecret("2547eb81b19310ffbda5f83043817136");
         setCallbackUrl("http://ssotest.yeecloud.com/login");
     }
 
-    public WeiXinClient(final String key, final String secret){
-//        setKey(key);
-//        setSecret(secret);
+    public SinaWeiboClient(final String key, final String secret){
+        //setKey(key);
+        //setSecret(secret);
     }
 
     @Override
-    protected BaseClient<OAuthCredentials, WeiXinProfile> newClient() {
-        WeiXinClient newClient = new WeiXinClient();
+    protected BaseClient<OAuthCredentials, SinaWeiboProfile> newClient() {
+        SinaWeiboClient newClient = new SinaWeiboClient();
         return newClient;
     }
 
     @Override
     protected void internalInit() {
         super.internalInit();
-        WeiXinApi20 api = new WeiXinApi20();
-        this.service = new WeiXinOAuth20ServiceImpl(api, new OAuthConfig(this.key, this.secret, this.callbackUrl,SignatureType.Header, null, null),
+        SinaWeiboApi20 api = new SinaWeiboApi20();
+        this.service = new SinaWeiboOAuth20ServiceImpl(api, new OAuthConfig(this.key, this.secret, this.callbackUrl,SignatureType.Header, null, null),
                                                                         this.connectTimeout, this.readTimeout, this.proxyHost,this.proxyPort);
     }
 
     @Override
     protected String getProfileUrl() {
-        // eg.google2Client:return "https://www.googleapis.com/oauth2/v2/userinfo";
-        return "https://api.weixin.qq.com/sns/userinfo";
+        return "https://api.weibo.com/2/users/show.json";
     }
 
     @Override
-    protected WeiXinProfile extractUserProfile(String body) {
-        WeiXinProfile weiXinProfile = new WeiXinProfile();
-        final JsonNode json = JsonHelper.getFirstNode(body);
+    protected SinaWeiboProfile extractUserProfile(String body) {
+        SinaWeiboProfile sinaWeiboProfile = new SinaWeiboProfile();
+        JSONObject json=JSON.parseObject(body);
+        System.out.println("json="+json.toString());
         if (null != json) {
-            for(final String attribute : WEI_XIN_ATTRIBUTES.getPrincipalAttributes()){
-                weiXinProfile.addAttribute(attribute, JsonHelper.get(json, attribute));
+            for(final String attribute : SINA_WEIBO_ATTRIBUTES.getPrincipalAttributes()){
+                sinaWeiboProfile.addAttribute(attribute, json.getString(attribute));
             }
-            String openId = (String) weiXinProfile.getAttributes().get("openid");
-            String weixinUsername="WEIXIN_"+openId;
-			/** 绑定账号到系统 */
+            String sinaWeiboId = (String) sinaWeiboProfile.getAttributes().get("id");
+			String sinaWeiboUsername="SINAWEIBO_"+sinaWeiboId;
+            /** 绑定账号到系统 */
 			UcMembers ucMembers=new UcMembers();
 			ucMembers.setUsersource(ThirdUserConstants.UserSource.WEIXIN);
-			ucMembers.setThirduid(openId);
-			ucMembers.setUsername(weixinUsername);
+			ucMembers.setThirduid(sinaWeiboId);
+			ucMembers.setUsername(sinaWeiboUsername);
 			String uid=iLoginSV.bindThirdUser(ucMembers);
-			weiXinProfile.addAttribute("userId", uid);
-			weiXinProfile.addAttribute("loginName", weixinUsername);
-			weiXinProfile.addAttribute("username", weixinUsername);
-			weiXinProfile.addAttribute("domainname", "CN");
-			weiXinProfile.setId(uid);
+			sinaWeiboProfile.addAttribute("userId", uid);
+			sinaWeiboProfile.addAttribute("loginName", sinaWeiboUsername);
+			sinaWeiboProfile.addAttribute("username", sinaWeiboUsername);
+			sinaWeiboProfile.addAttribute("domainname", "CN");
+			sinaWeiboProfile.setId(uid);
         }
-        return weiXinProfile;
+        return sinaWeiboProfile;
     }
 
     /**

@@ -63,6 +63,9 @@
                 <entry key-ref="proxyAuthenticationHandler" value-ref="proxyPrincipalResolver" />
                 <!-- <entry key-ref="primaryAuthenticationHandler" value-ref="primaryPrincipalResolver" /> -->
                 <entry key-ref="bssAuthenticationHandler" value-ref="bssPrincipalResolver" />
+                <!-- thirdlogin start gucl -->
+                <entry key-ref="primaryAuthenticationHandler" value-ref="primaryPrincipalResolver" />
+                <!-- thirdlogin end gucl -->
             </map>
         </constructor-arg>
 
@@ -77,7 +80,8 @@
         -->
         <property name="authenticationMetaDataPopulators">
            <util:list>
-              <bean class="org.jasig.cas.authentication.principal.RememberMeAuthenticationMetaDataPopulator" />
+              <!-- <bean class="org.jasig.cas.authentication.principal.RememberMeAuthenticationMetaDataPopulator" /> -->
+              <bean class="org.jasig.cas.support.pac4j.authentication.ClientAuthenticationMetaDataPopulator" />
            </util:list>
         </property>
 
@@ -92,6 +96,13 @@
             <bean class="org.jasig.cas.authentication.AnyAuthenticationPolicy" />
         </property>
     </bean>
+
+    <!-- thirdlogin start gucl -->
+	<bean id="primaryAuthenticationHandler" class="org.jasig.cas.support.pac4j.authentication.handler.support.ClientAuthenticationHandler">
+	    <constructor-arg index="0" ref="clients"/>
+	</bean>
+	<bean id="primaryPrincipalResolver" class="org.jasig.cas.support.pac4j.plugin.common.OauthPersonDirectoryPrincipalResolver" />
+    <!-- thirdlogin end gucl -->
 
     <!-- Required for proxy ticket mechanism. -->
     <bean id="proxyAuthenticationHandler"
@@ -113,14 +124,14 @@
     <bean id="bssAuthenticationHandler"
           class="com.ai.opt.sso.handler.BssCredentialsAuthencationHandler">
     </bean>
-	<bean id="primaryAuthenticationHandler"
+	<!-- <bean id="primaryAuthenticationHandler"
           class="org.jasig.cas.authentication.AcceptUsersAuthenticationHandler">
         <property name="users">
             <map>
                 <entry key="casuser" value="123456"/>
             </map>
         </property>
-    </bean>
+    </bean> -->
     <!-- Required for proxy ticket mechanism -->
     <bean id="proxyPrincipalResolver"
           class="org.jasig.cas.authentication.principal.BasicPrincipalResolver" />
@@ -132,10 +143,10 @@
     <bean id="bssPrincipalResolver"
           class="com.ai.opt.sso.handler.BssCredentialToPrincipalResolver" >
     </bean>
-  	<bean id="primaryPrincipalResolver"
+  	<!-- <bean id="primaryPrincipalResolver"
           class="org.jasig.cas.authentication.principal.PersonDirectoryPrincipalResolver" >
         <property name="attributeRepository" ref="attributeRepository" />
-    </bean>
+    </bean> -->
     <!--
     Bean that defines the attributes that a service may return.  This example uses the Stub/Mock version.  A real implementation
     may go against a database or LDAP server.  The id should remain "attributeRepository" though.
@@ -186,9 +197,12 @@
             		<value>mobile</value>
             		<value>email</value>
             		<value>domainname</value>
+            		<value>thirduid</value>
             		<!-- weixin -->
 				    <value>openid</value>
 				    <value>nickname</value>
+				    <!-- sina -->
+				    <value>id</value>
             	</list>
             </property>
         </bean>
