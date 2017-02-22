@@ -145,12 +145,18 @@
 			<list>
 				<ref bean="weiXin" />
 				<ref bean="sinaWeibo" />
+				<ref bean="qq" />
+				<ref bean="baidu" />
 			</list>
 		</property>
 	</bean>
 	<bean id="weiXin" class="org.jasig.cas.support.pac4j.plugin.weixin.WeiXinClient">
 	</bean>
 	<bean id="sinaWeibo" class="org.jasig.cas.support.pac4j.plugin.sinaweibo.SinaWeiboClient">
+	</bean>
+	<bean id="qq" class="org.jasig.cas.support.pac4j.plugin.qq.QQClient">
+	</bean>
+	<bean id="baidu" class="org.jasig.cas.support.pac4j.plugin.baidu.BaiduClient">
 	</bean>
 	<!-- thirdlogin end gucl -->
 </beans>

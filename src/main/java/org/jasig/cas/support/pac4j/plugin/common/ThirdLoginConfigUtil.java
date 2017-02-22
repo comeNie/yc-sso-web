@@ -22,12 +22,12 @@ import com.alibaba.fastjson.TypeReference;
       "secret": ""<br>
     },<br>
     "baidu": {<br>
-      "appid": "",<br>
-      "secret": ""<br>
+      "appid": "bt3CnVDOjdbZcYUaX59ZExXc",<br>
+      "secret": "l0gM1BvAcY2L7PFr3xuG3rki2mKk305S"<br>
     },<br>
     "qq": {<br>
-      "appid": "",<br>
-      "secret": ""<br>
+      "appid": "101378897",<br>
+      "secret": "1dc5a602743f62a60ddf66b1cd2e20b7"<br>
     },<br>
     "sinaweibo": {<br>
       "appid": "606577360",<br>
