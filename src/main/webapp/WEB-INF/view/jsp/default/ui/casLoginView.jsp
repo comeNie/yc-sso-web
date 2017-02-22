@@ -93,8 +93,8 @@
 							</li>
 							<li>
 								<p><a href="#" class="share share1"></a></p>
-								<p><a href="#" class="share share2"></a></p>
-								<p><a href="#" class="share share3"></a></p>
+								<p><a href="${BaiduClientUrl}" class="share share2"></a></p>
+								<p><a href="${QQClientUrl}" class="share share3"></a></p>
 								<p><a href="${SinaWeiboClientUrl}" class="share share4"></a></p>
 								<p><a href="${WeiXinClientUrl}" class="share share5"></a></p>
 								<p><a href="#" class="share share6"></a></p>
