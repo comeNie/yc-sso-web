@@ -81,7 +81,9 @@
         <property name="authenticationMetaDataPopulators">
            <util:list>
               <!-- <bean class="org.jasig.cas.authentication.principal.RememberMeAuthenticationMetaDataPopulator" /> -->
+              <!-- thirdlogin start gucl -->
               <bean class="org.jasig.cas.support.pac4j.authentication.ClientAuthenticationMetaDataPopulator" />
+           	  <!-- thirdlogin end gucl -->
            </util:list>
         </property>
 
@@ -198,11 +200,6 @@
             		<value>email</value>
             		<value>domainname</value>
             		<value>thirduid</value>
-            		<!-- weixin -->
-				    <value>openid</value>
-				    <value>nickname</value>
-				    <!-- sina -->
-				    <value>id</value>
             	</list>
             </property>
         </bean>

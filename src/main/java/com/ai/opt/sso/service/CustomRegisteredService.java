@@ -41,7 +41,7 @@ public class CustomRegisteredService extends RegexRegisteredService{
 
     @Override
     public boolean matches(Service service) {
-        LOG.error("service=["+service.getId()+"]开始进行白名单认证");
+        LOG.info("service=["+service.getId()+"]开始进行白名单认证");
         if(super.matches(service)){//正则表达式认证成功，进行自定义service白名单认证
             Pattern p =  Pattern.compile("//([^/]+)(/.*)+");
             Matcher matcher = p.matcher(service.getId());
@@ -50,9 +50,9 @@ public class CustomRegisteredService extends RegexRegisteredService{
                 if(host.indexOf(':')>0){
                     host = host.substring(0,host.indexOf(":"));
                 }
-                LOG.error("service=["+service.getId()+"]中的host部分为："+host);
+                LOG.info("service=["+service.getId()+"]中的host部分为："+host);
                 if(IPHelper.isWhiteList(host,whiteList)){
-                    LOG.error("service=["+service.getId()+"]白名单认证通过");
+                    LOG.info("service=["+service.getId()+"]白名单认证通过");
                     return true;
                 }
             }
