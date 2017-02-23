@@ -13,6 +13,7 @@ import org.scribe.model.Response;
 import org.scribe.model.Token;
 import org.scribe.model.Verifier;
 import org.scribe.oauth.ProxyOAuth20ServiceImpl;
+import org.scribe.utils.OAuthEncoder;
 
 /**
  * 用于添加获取ACCESS_TOKEN与用户信息添加参数并请求微信
@@ -33,14 +34,21 @@ public class SinaWeiboOAuth20ServiceImpl extends ProxyOAuth20ServiceImpl {
      */
     @Override
     public Token getAccessToken(final Token requestToken, final Verifier verifier) {
+    	String urlAccessTokenEndpoint=String.format(
+    			this.api.getAccessTokenEndpoint(), 
+    			this.config.getApiKey(),
+    			this.config.getApiSecret(),
+    			verifier.getValue(),
+    			OAuthEncoder.encode(this.config.getCallback()));
         final OAuthRequest request = new ProxyOAuthRequest(this.api.getAccessTokenVerb(),
-                                                           this.api.getAccessTokenEndpoint(), this.connectTimeout,
+        												   urlAccessTokenEndpoint, this.connectTimeout,
                                                            this.readTimeout, this.proxyHost, this.proxyPort);
-        request.addBodyParameter("client_id", this.config.getApiKey());
+        //
+        /*request.addBodyParameter("client_id", this.config.getApiKey());
         request.addBodyParameter("client_secret", this.config.getApiSecret());
         request.addBodyParameter(OAuthConstants.CODE, verifier.getValue());
         request.addBodyParameter(OAuthConstants.REDIRECT_URI, this.config.getCallback());
-        request.addBodyParameter("grant_type", "authorization_code");
+        request.addBodyParameter("grant_type", "authorization_code");*/
         final Response response = request.send();
         return this.api.getAccessTokenExtractor().extract(response.getBody());
     }

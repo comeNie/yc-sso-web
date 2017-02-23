@@ -32,7 +32,7 @@ public class SinaWeiboApi20 extends DefaultApi20
   @Override
   public String getAccessTokenEndpoint()
   {
-    return "https://api.weibo.com/oauth2/access_token?grant_type=authorization_code";
+    return "https://api.weibo.com/oauth2/access_token?client_id=%s&client_secret=%s&code=%s&redirect_uri=%s&grant_type=authorization_code";
   }
 
   @Override
