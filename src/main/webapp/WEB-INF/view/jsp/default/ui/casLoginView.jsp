@@ -42,7 +42,7 @@
 		<div class="login-big"> 
 	<form:form method="post" id="fm1" name="fm1" commandName="${commandName}" htmlEscape="true">
 			<div class="login-headr">
-				<p><a href="${default_index_url}"><img src="${_baasBase}/images/${logoPic}" /></a></p>
+				<p><a href="${default_index_url}"><img src="${_baasBase}/images/login-logo.png" /></a></p>
 				<p class="word"><spring:message code="dom.lables.accountlongin"/></p></div>
 			<div class="login-wrapper">
 				<div class="login-left"><img src="${_baasBase }/images/login-bj.png"></div>
