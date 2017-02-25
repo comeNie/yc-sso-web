@@ -22,20 +22,28 @@
 	<script language="javascript" src="${pageContext.request.contextPath}/resources/spm_modules/app/login/messenger.js"></script>  
 	<script language="javascript" src="${pageContext.request.contextPath}/resources/spm_modules/app/login/casLoginView.js"></script>
 	<%
-	String default_editpassword_url = CCSClientFactory.getDefaultConfigClient().get("/default_editpassword_url");
-	String default_register_url = CCSClientFactory.getDefaultConfigClient().get("/default_register_url");
-	String errorNumCCS = CCSClientFactory.getDefaultConfigClient().get("/errorNum");
-	String errorNumTimeOutCCS = CCSClientFactory.getDefaultConfigClient().get("/errorNumTimeOut");
-	 request.setAttribute("default_editpassword_url", default_editpassword_url);
-	 request.setAttribute("default_register_url", default_register_url);
-	 request.setAttribute("errorNumCCS", errorNumCCS);
-	 request.setAttribute("errorNumTimeOutCCS", errorNumTimeOutCCS);
+		String default_editpassword_url = CCSClientFactory.getDefaultConfigClient().get("/default_editpassword_url");
+		String default_register_url = CCSClientFactory.getDefaultConfigClient().get("/default_register_url");
+		String errorNumCCS = CCSClientFactory.getDefaultConfigClient().get("/errorNum");
+		String errorNumTimeOutCCS = CCSClientFactory.getDefaultConfigClient().get("/errorNumTimeOut");
+		request.setAttribute("default_editpassword_url", default_editpassword_url);
+		request.setAttribute("default_register_url", default_register_url);
+		request.setAttribute("errorNumCCS", errorNumCCS);
+		request.setAttribute("errorNumTimeOutCCS", errorNumTimeOutCCS);
+		String systemId = request.getParameter("systemId");
+		String logoEnd = "login-logo";
+		if (systemId != null && systemId.trim().length() > 0) {
+			logoEnd += ("-" + systemId);
+		}
+		request.setAttribute("logoPic", logoEnd + ".png");
 	%>  
 </head>
 <body class="login-body">
 		<div class="login-big"> 
 	<form:form method="post" id="fm1" name="fm1" commandName="${commandName}" htmlEscape="true">
-			<div class="login-headr"><p><a href="${default_index_url}"><img src="${_baasBase }/images/login-logo.png" /></a></p><p class="word"><spring:message code="dom.lables.accountlongin"/></p></div>
+			<div class="login-headr">
+				<p><a href="${default_index_url}"><img src="${_baasBase}/images/${logoPic}" /></a></p>
+				<p class="word"><spring:message code="dom.lables.accountlongin"/></p></div>
 			<div class="login-wrapper">
 				<div class="login-left"><img src="${_baasBase }/images/login-bj.png"></div>
 				<div class="login-right radius">
@@ -98,7 +106,7 @@
 								<p><a href="${SinaWeiboClientUrl}" class="share share4"></a></p>
 								<p><a href="${WeiXinClientUrl}" class="share share5"></a></p>
 								<p><a href="#" class="share share6"></a></p>
-								<p><a href="#" class="share share7 none-ma"></a></p>	
+								<p><a href="${FaceBookClientUrl}" class="share share7 none-ma"></a></p>
 							</li>
 						</ul>
 					</div>
