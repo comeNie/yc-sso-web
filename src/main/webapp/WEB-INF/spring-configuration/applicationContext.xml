@@ -147,6 +147,7 @@
 				<ref bean="sinaWeibo" />
 				<ref bean="qq" />
 				<ref bean="baidu" />
+                <ref bean="faceBook"/>
 			</list>
 		</property>
 	</bean>
@@ -158,5 +159,7 @@
 	</bean>
 	<bean id="baidu" class="org.jasig.cas.support.pac4j.plugin.baidu.BaiduClient">
 	</bean>
+    <bean id="faceBook" class="org.jasig.cas.support.pac4j.plugin.facebook.FaceBookClient">
+    </bean>
 	<!-- thirdlogin end gucl -->
 </beans>

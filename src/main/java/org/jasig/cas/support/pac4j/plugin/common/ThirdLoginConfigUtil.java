@@ -36,7 +36,11 @@ import com.alibaba.fastjson.TypeReference;
     "weixin": {<br>
       "appid": "wxe5a67ee0fb5e181f",<br>
       "secret": "25bd1d5a4ac75618a7ed2cbd46417800"<br>
-    }<br>
+    },<br>
+ 	"facebook": {<br>
+ 		"appid": "252390021878892",<br>
+ 		"secret": "d42ba06aafee03b2a79c727754cfbd85"<br>
+ 	}<br>
   }<br>
 }<br>
  *
@@ -53,6 +57,7 @@ public class ThirdLoginConfigUtil {
 	public static final String BAIDU="baidu";
 	public static final String QQ="qq";
 	public static final String KINGSOFT="kingsoft";
+	public static final String FACEBOOK = "facebook";
 	
 	
 	
@@ -106,7 +111,10 @@ public class ThirdLoginConfigUtil {
 	public static ThirdOauthConfig getKingSoftConfig(){
 		return getAllThirdAppsConfig().get(KINGSOFT);
 	}
-	
+	public static ThirdOauthConfig getFaceBookConfig(){
+		return getAllThirdAppsConfig().get(FACEBOOK);
+	}
+
 	public static void main(String[] args) {
 //		System.out.println(JSON.toJSONString(getWeixinConfig()));
 		System.out.println(getCallBackUrl());
