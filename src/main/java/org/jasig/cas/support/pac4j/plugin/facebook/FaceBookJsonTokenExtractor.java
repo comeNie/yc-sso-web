@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 用于获取微信返回的ACCESS_TOKEN
+ * 用于获取FaceBook返回的ACCESS_TOKEN
  * @author b2c021
  *
  */

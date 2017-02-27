@@ -79,7 +79,7 @@ public class FaceBookClient extends BaseOAuth20Client<FaceBookProfile> {
 			String thirdName="FACEBOOK_"+thirdUid;
             /** 绑定账号到系统 */
 			UcMembers ucMembers=new UcMembers();
-			ucMembers.setUsersource(ThirdUserConstants.UserSource.SINA);
+			ucMembers.setUsersource(ThirdUserConstants.UserSource.FACEBOOK);
 			ucMembers.setThirduid(thirdUid);
 			ucMembers.setUsername(thirdName);
 			String uid=iLoginSV.bindThirdUser(ucMembers);

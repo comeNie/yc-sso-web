@@ -21,6 +21,7 @@ public final class ThirdUserConstants {
     	public static final String QQ = "3";
     	public static final String SINA = "6";
     	public static final String WEIXIN = "7";
+    	public static final String FACEBOOK = "8";
     	
 //    	public static final String FACEBOOK = "";
 //    	public static final String TWITTER = "";

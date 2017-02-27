@@ -16,9 +16,6 @@ import java.util.regex.Pattern;
  */
 public class FaceBookOAuth20ServiceImpl extends ProxyOAuth20ServiceImpl {
 
-
-    private static Pattern uidPattern = Pattern.compile("\"uid\":\\s*\"(\\S*?)\"");
-
     public FaceBookOAuth20ServiceImpl(DefaultApi20 api, OAuthConfig config, int connectTimeout, int readTimeout, String proxyHost, int proxyPort) {
         super(api, config, connectTimeout, readTimeout, proxyHost, proxyPort);
     }
@@ -34,9 +31,9 @@ public class FaceBookOAuth20ServiceImpl extends ProxyOAuth20ServiceImpl {
     			this.config.getApiSecret(),
     			verifier.getValue(),
     			OAuthEncoder.encode(this.config.getCallback()));
-        final OAuthRequest request = new ProxyOAuthRequest(this.api.getAccessTokenVerb(),
-        												   urlAccessTokenEndpoint, this.connectTimeout,
-                                                           this.readTimeout, this.proxyHost, this.proxyPort);
+        final OAuthRequest request = new ProxyOAuthRequest(
+                this.api.getAccessTokenVerb(),urlAccessTokenEndpoint,
+                this.connectTimeout,this.readTimeout, this.proxyHost, this.proxyPort);
         //
         /*request.addBodyParameter("client_id", this.config.getApiKey());
         request.addBodyParameter("client_secret", this.config.getApiSecret());
@@ -50,13 +47,6 @@ public class FaceBookOAuth20ServiceImpl extends ProxyOAuth20ServiceImpl {
     @Override
     public void signRequest(final Token accessToken, final OAuthRequest request) {
         request.addQuerystringParameter(OAuthConstants.ACCESS_TOKEN, accessToken.getToken());
-        String response = accessToken.getRawResponse();
-        Matcher matcher = uidPattern.matcher(response);
-        if(matcher.find()){
-            request.addQuerystringParameter("uid", matcher.group(1));
-        }
-        else{
-            throw new OAuthException("新浪微博接口返回数据miss uid: " + response);
-        }
+//        String response = accessToken.getRawResponse();
     }
 }

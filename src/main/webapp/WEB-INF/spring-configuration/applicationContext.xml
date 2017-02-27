@@ -160,6 +160,8 @@
 	<bean id="baidu" class="org.jasig.cas.support.pac4j.plugin.baidu.BaiduClient">
 	</bean>
     <bean id="faceBook" class="org.jasig.cas.support.pac4j.plugin.facebook.FaceBookClient">
+        <property name="connectTimeout" value="3000"/>
+        <property name="readTimeout" value="2000"/>
     </bean>
 	<!-- thirdlogin end gucl -->
 </beans>
