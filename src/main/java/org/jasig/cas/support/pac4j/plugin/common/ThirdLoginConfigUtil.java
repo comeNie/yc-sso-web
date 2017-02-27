@@ -58,9 +58,8 @@ public class ThirdLoginConfigUtil {
 	public static final String QQ="qq";
 	public static final String KINGSOFT="kingsoft";
 	public static final String FACEBOOK = "facebook";
-	
-	
-	
+	public static final String TWITTER = "twitter";
+
 	public static String getCallBackUrl(){
 		try {
             String conf = CCSClientFactory.getDefaultConfigClient().get(CCS_THIRD_LOGIN_PATH);
@@ -113,6 +112,9 @@ public class ThirdLoginConfigUtil {
 	}
 	public static ThirdOauthConfig getFaceBookConfig(){
 		return getAllThirdAppsConfig().get(FACEBOOK);
+	}
+	public static ThirdOauthConfig getTwitterConfig(){
+		return getAllThirdAppsConfig().get(TWITTER);
 	}
 
 	public static void main(String[] args) {

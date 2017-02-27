@@ -147,7 +147,8 @@
 				<ref bean="sinaWeibo" />
 				<ref bean="qq" />
 				<ref bean="baidu" />
-                <ref bean="faceBook"/>
+                <ref bean="ycFaceBook"/>
+                <ref bean="ycTwitter"/>
 			</list>
 		</property>
 	</bean>
@@ -159,9 +160,10 @@
 	</bean>
 	<bean id="baidu" class="org.jasig.cas.support.pac4j.plugin.baidu.BaiduClient">
 	</bean>
-    <bean id="faceBook" class="org.jasig.cas.support.pac4j.plugin.facebook.FaceBookClient">
+    <bean id="ycFaceBook" class="org.jasig.cas.support.pac4j.plugin.facebook.YcFaceBookClient">
         <property name="connectTimeout" value="3000"/>
         <property name="readTimeout" value="2000"/>
     </bean>
+    <bean id="ycTwitter" class="org.jasig.cas.support.pac4j.plugin.twitter.YcTwitterClient"></bean>
 	<!-- thirdlogin end gucl -->
 </beans>

@@ -105,8 +105,8 @@
 								<p><a href="${QQClientUrl}" class="share share3"></a></p>
 								<p><a href="${SinaWeiboClientUrl}" class="share share4"></a></p>
 								<p><a href="${WeiXinClientUrl}" class="share share5"></a></p>
-								<p><a href="#" class="share share6"></a></p>
-								<p><a href="${FaceBookClientUrl}" class="share share7 none-ma"></a></p>
+								<p><a href="${YcTwitterClientUrl}" class="share share6"></a></p>
+								<p><a href="${YcFaceBookClientUrl}" class="share share7 none-ma"></a></p>
 							</li>
 						</ul>
 					</div>
