@@ -29,10 +29,10 @@ public class FaceBookAttributesDefinition extends BaseAttributesDefinition {
 
     public FaceBookAttributesDefinition(){
         addAttribute("id", Converters.stringConverter);  //用户UID
-        addAttribute("idstr", Converters.stringConverter);  //用户UIDgender
-        addAttribute("gender", Converters.stringConverter);  //性别,m--男，f--女,n--未知
-        addAttribute("avatar_hd", Converters.stringConverter);//大头像地址高清
-        addAttribute("avatar_large", Converters.stringConverter);//大头像地址
-        addAttribute("cover_image", Converters.stringConverter);//cover图片地址
+        addAttribute("name", Converters.stringConverter);  //用户全名
+//        addAttribute("gender", Converters.stringConverter);  //性别,m--男，f--女,n--未知
+//        addAttribute("first_name", Converters.stringConverter);//
+//        addAttribute("last_name", Converters.stringConverter);//
+//        addAttribute("cover", Converters.stringConverter);//cover图片地址
     }
 }
