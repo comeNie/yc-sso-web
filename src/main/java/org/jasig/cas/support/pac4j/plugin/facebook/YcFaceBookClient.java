@@ -5,6 +5,7 @@ import com.ai.opt.data.constants.ThirdUserConstants;
 import com.ai.opt.data.dao.mapper.bo.UcMembers;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.jasig.cas.support.pac4j.plugin.common.ThirdLoginConfigUtil;
+import org.jasig.cas.support.pac4j.plugin.common.YcOAuthAttributesDefinitions;
 import org.pac4j.oauth.client.FacebookClient;
 import org.pac4j.oauth.profile.JsonHelper;
 import org.pac4j.oauth.profile.OAuthAttributesDefinitions;
@@ -44,12 +45,12 @@ public class YcFaceBookClient extends FacebookClient {
     }
 
     @Override
-    protected FacebookProfile extractUserProfile(final String body) {
-        final FacebookProfile profile = new FacebookProfile();
+    protected YcFacebookProfile extractUserProfile(final String body) {
+        final YcFacebookProfile profile = new YcFacebookProfile();
         final JsonNode json = JsonHelper.getFirstNode(body);
         if (json != null) {
             profile.setId(JsonHelper.get(json, "id"));
-            for (final String attribute : OAuthAttributesDefinitions.facebookDefinition.getAllAttributes()) {
+            for (final String attribute : YcOAuthAttributesDefinitions.facebookDefinition.getAllAttributes()) {
                 profile.addAttribute(attribute, JsonHelper.get(json, attribute));
             }
             String thirdUid = profile.getId();

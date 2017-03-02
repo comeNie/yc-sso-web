@@ -5,6 +5,7 @@ import com.ai.opt.data.constants.ThirdUserConstants;
 import com.ai.opt.data.dao.mapper.bo.UcMembers;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.jasig.cas.support.pac4j.plugin.common.ThirdLoginConfigUtil;
+import org.jasig.cas.support.pac4j.plugin.common.YcOAuthAttributesDefinitions;
 import org.pac4j.oauth.client.TwitterClient;
 import org.pac4j.oauth.profile.JsonHelper;
 import org.pac4j.oauth.profile.OAuthAttributesDefinitions;
@@ -27,18 +28,28 @@ public class YcTwitterClient extends TwitterClient {
         setCallbackUrl(callbackurl);
     }
 
+    public YcTwitterClient(final String key, final String secret) {
+        setKey(key);
+        setSecret(secret);
+    }
+
     @Override
     protected YcTwitterClient newClient() {
         return new YcTwitterClient();
     }
 
     @Override
-    protected TwitterProfile extractUserProfile(final String body) {
-        final TwitterProfile profile = new TwitterProfile();
+    protected String getProfileUrl() {
+        //官方要求必须为为https
+        return "https://api.twitter.com/1.1/account/verify_credentials.json";
+    }
+    @Override
+    protected YcTwitterProfile extractUserProfile(final String body) {
+        final YcTwitterProfile profile = new YcTwitterProfile();
         final JsonNode json = JsonHelper.getFirstNode(body);
         if (json != null) {
             profile.setId(JsonHelper.get(json, "id"));
-            for (final String attribute : OAuthAttributesDefinitions.twitterDefinition.getAllAttributes()) {
+            for (final String attribute : YcOAuthAttributesDefinitions.twitterDefinition.getAllAttributes()) {
                 profile.addAttribute(attribute, JsonHelper.get(json, attribute));
             }
             String thirdUid = profile.getId();
