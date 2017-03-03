@@ -40,6 +40,10 @@ import com.alibaba.fastjson.TypeReference;
  	"facebook": {<br>
  		"appid": "252390021878892",<br>
  		"secret": "d42ba06aafee03b2a79c727754cfbd85"<br>
+ 	},<br>
+ 	"twitter": {<br>
+ 		"appid": "2Q4fzw2JW4QrZ9BeiBCYH5oKt",<br>
+ 		"secret": "FqjNmgrq6szfU3B695habiu6sPL7ndR6bjadW42D1j20hb4pER"<br>
  	}<br>
   }<br>
 }<br>
