@@ -3,9 +3,9 @@
 <%
     //根据系统标识，显示不同页面
     String systemId = request.getParameter("systemId");
-    String loginView = "/jsp/clientLogin/yeecloud/loginView.jsp";
+    String loginView = "/jsp/clientLogin/loginView.jsp";
     if(systemId!=null && !"".equals(systemId.trim())){
-        loginView = "/jsp/clientLogin/"+systemId+"/loginView.jsp";
+        loginView = "/jsp/clientLogin/"+systemId+"LoginView.jsp";
     }
     request.setAttribute("loginView",loginView);
     System.out.println("loginView = [" + loginView + "]");
