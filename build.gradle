@@ -22,10 +22,12 @@ sourceCompatibility = 1.7
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 repositories {
-	//mavenLocal()
+	mavenLocal()
 	//mavenCentral()
 	//maven{ url "http://223.202.119.155:18081/nexus/content/groups/public/"}
-	maven { url "http://10.1.228.199:18081/nexus/content/groups/public/" }
+	//maven { url "http://10.1.228.199:18081/nexus/content/groups/public/" }
+	maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+	
 }
 ext {
 	ipaasVersion="1.0-SNAPSHOT"
@@ -53,7 +55,7 @@ dependencies {
 	//servlet
 	compile "javax.servlet:javax.servlet-api:3.1.0"
 	compile "javax.servlet.jsp:javax.servlet.jsp-api:2.3.1"
-    compile 'mysql:mysql-connector-java:5.1.36'	
+  compile 'mysql:mysql-connector-java:5.1.36'	
 
 	//json
 	compile 'org.json:json:20140107'
@@ -97,7 +99,7 @@ dependencies {
 eclipse {
 	wtp {
 	  facet {
-		facet name: 'java', version: '1.7'
+		facet name: 'java', version: '1.8'
 		facet name: 'jst.web', version: '3.0'
 		facet name: 'wst.jsdt.web', version: '1.0'
 		  }
